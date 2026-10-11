@@ -1,0 +1,112 @@
+/* Fondo general */
+body {
+  background: radial-gradient(circle at top, #0f2b3f 0%, #050811 55%, #020308 100%);
+  color: #e5f4ff;
+  font-family: system-ui, "Segoe UI", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* HEADER */
+.zd-header-create {
+  width: 100%;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.zd-header-create h1 {
+  color: #3fd5ff;
+  font-size: 22px;
+}
+
+.zd-header-create nav a {
+  margin-left: 20px;
+  color: #e5f4ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.zd-header-create nav a.logout {
+  color: #ff4b4b;
+}
+
+.zd-header-create nav a:hover {
+  opacity: 0.8;
+}
+
+/* Centrado de la tarjeta */
+.zd-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 100px);
+}
+
+/* Tarjeta */
+.zd-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  max-width: 450px;
+  width: 100%;
+}
+
+/* Grupos del formulario */
+.zd-form-group {
+  margin-bottom: 20px;
+}
+
+.zd-form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: #9fb7d9;
+  font-size: 14px;
+}
+
+/* Inputs y selects */
+.zd-form-group input,
+.zd-form-group select {
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.05);
+  color: #e5f4ff;
+  font-size: 15px;
+}
+
+.zd-form-group input:focus,
+.zd-form-group select:focus {
+  outline: none;
+  border-color: #3fd5ff;
+
+}
+
+/* Opciones del select visibles */
+select option {
+  background: #0f1a2b;
+  color: #e5f4ff;
+}
+
+/* Botón crear usuario */
+.zd-btn-create {
+  background: #3fd5ff;
+  color: #000;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+  transition: 0.2s ease;
+  border: none;
+}
+
+.zd-btn-create:hover {
+  transform: translateY(-3px);
+  opacity: 0.9;
+}

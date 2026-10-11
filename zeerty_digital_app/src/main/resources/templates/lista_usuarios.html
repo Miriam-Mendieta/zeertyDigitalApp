@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Miriam Mendieta" name="author">
+    <title>ZeertyDigital – Lista de Usuarios</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/lista_usuarios.css}">
+</head>
+
+<body>
+
+    <!-- HEADER ADMIN -->
+    <header class="zd-header-admin">
+        <h1>Panel de Administración</h1>
+
+        <nav>
+            <a href="/admin/home">Inicio</a>
+            <a href="/admin/lista">Usuarios</a>
+            <a href="/admin/crear">Crear usuario</a>
+            <a href="/logout" class="logout">Salir</a>
+        </nav>
+    </header>
+
+    <main class="zd-main">
+
+        <section class="zd-card">
+            <h2>Lista de usuarios</h2>
+
+            <table class="zd-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Rol</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr th:each="u : ${usuarios}">
+                        <td th:text="${u.idUsuario}"></td>
+                        <td th:text="${u.nombre}"></td>
+                        <td th:text="${u.email}"></td>
+                        <td th:text="${u.rol}"></td>
+                        <td th:text="${u.estado}"></td>
+
+                        <td>
+                            <a th:href="@{'/admin/modificar/' + ${u.idUsuario}}" class="zd-btn-secondary">Editar</a>
+                            <a th:href="@{'/admin/eliminar/' + ${u.idUsuario}}" class="zd-btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </section>
+
+    </main>
+
+    <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Miriam Mendieta" name="author">
+    <title>ZeertyDigital – Alta de Usuario</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/crear_usuario.css}">
+</head>
+
+<body>
+    <header class="zd-header-create">
+        <h1>Dar de alta usuario</h1>
+
+        <nav>
+            <a href="/admin/home" class="zd-link">Volver</a>
+            <a href="/logout" class="zd-link logout">Salir</a>
+        </nav>
+    </header>
+
+    <div class="zd-center">
+        <section class="zd-card">
+
+            <form th:action="@{/admin/crear}" method="post">
+
+                <div class="zd-form-group">
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" required>
+                </div>
+
+                <div class="zd-form-group">
+                    <label>Apellidos</label>
+                    <input type="text" name="apellidos" required>
+                </div>
+
+                <div class="zd-form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required>
+                </div>
+
+                <div class="zd-form-group">
+                    <label>Teléfono</label>
+                    <input type="text" name="telefono">
+                </div>
+
+                <div class="zd-form-group">
+                    <label>Contraseña</label>
+                    <input type="password" name="password" required>
+                </div>
+
+                <div class="zd-form-group">
+                    <label>Rol</label>
+                    <select name="rol" required>
+                        <option value="ADMIN">Administración</option>
+                        <option value="AUDITOR">Auditoría</option>
+                        <option value="USER">Usuario App</option>
+                        <option value="INVITADO">Invitado</option>
+                    </select>
+                </div>
+
+                <div class="zd-form-group">
+                    <label>Estado</label>
+                    <select name="estado" required>
+                        <option value="ACTIVO">Activo</option>
+                        <option value="INACTIVO">Inactivo</option>
+                    </select>
+                </div>
+
+                <button class="zd-btn-create">Crear usuario</button>
+
+            </form>
+
+        </section>
+    </div>
+    <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+</body>
+</html>

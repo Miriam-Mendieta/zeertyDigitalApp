@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!-- 
+xmlns:th="http://www.thymeleaf.org"
+Activa el “espacio de nombres” de Thymeleaf.
+Permite usar atributos especiales como th:href, th:src, th:text, th:each, etc.
+Sin esto, Thymeleaf no reconoce sus propias funciones.
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta content="Miriam Mendieta" name="author">
+  <title>ZeertyDigital - Tecnología que Acompaña, Simplifica y Avanza</title>
+  <meta name="description"
+    content="Soluciones tecnológicas avanzadas para simplificar, proteger y hacer avanzar tu entorno digital.">
+
+  <meta name="robots" content="index, follow">
+  <meta name="googlebot" content="index, follow">
+
+  <meta name="theme-color" content="#232a40">
+
+  <!-- Favicon -->
+  <!-- 
+  th:href="@{/ruta}"
+  Thymeleaf genera la ruta correcta hacia /static/img/...
+  Evita errores cuando cambias el puerto o despliegas en servidor.
+  -->
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+  <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+
+  <!-- Preload -->
+  <!-- 
+  th:href="@{/css/global.css}"
+  Thymeleaf resuelve la ruta al archivo dentro de /static/css/
+  as="style"
+  Indica al navegador que el recurso es CSS.
+  -->
+  <link rel="preload" th:href="@{/css/global.css}" as="style">
+  <link rel="preload" th:href="@{/css/transition.css}" as="style">
+  <link rel="preload" th:href="@{/img/logoZeerty.png}" as="image">
+
+  <!-- CSS -->
+  <link rel="stylesheet" th:href="@{/css/global.css}">
+  <link rel="stylesheet" th:href="@{/css/transition.css}">
+</head>
+
+<body>
+  <div id="loader-wrapper">
+    <div class="loader-content">
+      <!-- 
+      th:src="@{/img/logoZeerty.png}"
+      → Thymeleaf genera la ruta correcta hacia la imagen.
+      -->
+      <img th:src="@{/img/logoZeerty.png}" alt="ZeertyDigital" class="loader-logo">
+      <div class="loading-spinner"></div>
+      <p class="loading-text">CARGANDO...</p>
+    </div>
+  </div>
+
+  <!-- Redirige a la página de inicio de sesión después de 3 segundos -->
+  <script>
+    setTimeout(() => {
+      window.location.href = "/entrar";
+    }, 3000);
+  </script>
+</body>
+</html>

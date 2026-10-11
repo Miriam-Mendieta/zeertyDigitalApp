@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<!-- 
+xmlns:th="http://www.thymeleaf.org"
+→ Activa el uso de atributos Thymeleaf dentro del HTML.
+→ Permite usar th:href, th:src, th:text, etc.
+-->
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="Miriam Mendieta" name="author">
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+  <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+
+  <title>ZeertyDigital - Entrar</title>
+
+  <!-- CSS -->
+  <!-- 
+  th:href="@{/css/global.css}"
+  → Thymeleaf resuelve la ruta hacia /static/css/global.css
+  -->
+  <link rel="stylesheet" th:href="@{/css/global.css}">
+  <link rel="stylesheet" th:href="@{/css/entrar.css}">
+</head>
+
+<body>
+  <div class="zd-center">
+    <section class="zd-card zd-login-card">
+      <div class="screen">
+        <div class="logo-area">
+          <img th:src="@{/img/logoZeerty.png}" class="logo" alt="ZeertyDigital">
+        </div>
+
+        <button class="enter-btn" onclick="entrar()">ENTRAR</button>
+      </div>
+    </section>
+  </div>
+</body>
+
+  <script>
+    /* 
+     Redirección hacia el controlador que sirve la vista login.html.
+     En Thymeleaf NO se navega a login.html directamente.
+     Se navega a /login (ruta del controlador).
+     */
+    function entrar() {
+      window.location.href = "/login";
+    }
+  </script>
+</body>
+
+</html>

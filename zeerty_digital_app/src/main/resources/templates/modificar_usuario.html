@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="Miriam Mendieta" name="author">
+  <title>ZeertyDigital – Modificar Usuario</title>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+  <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+
+  <link rel="stylesheet" th:href="@{/css/modificar_usuario.css}">
+</head>
+
+<body>
+
+  <header class="zd-header">
+    <h1>Modificar usuario</h1>
+  </header>
+
+  <main class="zd-main">
+
+    <form action="/admin/modificar" method="post" class="zd-form" th:object="${usuario}">
+
+      <input type="hidden" th:field="*{idUsuario}">
+
+      <label>Nombre</label>
+      <input type="text" th:field="*{nombre}" required>
+
+      <label>Apellidos</label>
+      <input type="text" th:field="*{apellidos}" required>
+
+      <label>Email</label>
+      <input type="email" th:field="*{email}" required>
+
+      <label>Teléfono</label>
+      <input type="text" th:field="*{telefono}">
+
+      <label>Contraseña</label>
+      <input type="password" th:field="*{passwordHash}" required>
+
+      <label>Rol</label>
+      <select th:field="*{rol}">
+        <option value="ADMINISTRACION">Administración</option>
+        <option value="AUDITORIA">Auditoría</option>
+        <option value="USUARIO_APP">Usuario App</option>
+        <option value="INVITADO">Invitado</option>
+      </select>
+
+      <label>Estado</label>
+      <select th:field="*{estado}">
+        <option value="ACTIVO">Activo</option>
+        <option value="INACTIVO">Inactivo</option>
+      </select>
+
+      <button class="zd-btn-primary" type="submit">Guardar cambios</button>
+    </form>
+
+  </main>
+  <th:block th:replace="fragments/footer :: footer"></th:block>
+
+</body>
+</html>

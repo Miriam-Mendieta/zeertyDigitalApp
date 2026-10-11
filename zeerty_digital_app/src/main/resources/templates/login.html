@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="Miriam Mendieta" name="author">
+  <title>ZeertyDigital – Inicio de sesión</title>
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+  <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+  <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+  <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+
+  <link rel="stylesheet" th:href="@{/css/global.css}">
+  <link rel="stylesheet" th:href="@{/css/login.css}">
+</head>
+
+<body>
+  <div class="zd-center">
+    <section class="zd-card zd-login-card">
+      <div class="login-container">
+        <div class="header">
+          <!-- 
+              th:src="@{/img/logoZeerty.png}"
+             → Thymeleaf genera la ruta correcta hacia la imagen.
+          -->
+          <img th:src="@{/img/logoZeerty.png}" class="logo" alt="ZeertyDigital">
+
+          <p class="tagline">Tecnología que acompaña... Simplifica, protege y avanza</p>
+        </div>
+
+        <!-- 
+          Formulario de inicio de sesión
+          th:action="@{/entrar}" → Thymeleaf genera la ruta correcta hacia el endpoint /entrar.
+          method="post" → Se envía la información del formulario mediante el método POST.
+      -->
+        <form class="login-form" th:action="@{/procesar-login}" method="post">
+          <label for="email">Correo electrónico</label>
+          <input id="email" name="email" type="email" placeholder="micorreo@gmail.com" required>
+
+          <label for="pass">Contraseña</label>
+          <input id="pass" name="password" type="password" placeholder="••••••••" required>
+
+          <a class="forgot">¿Has olvidado tu contraseña?</a>
+
+          <button type="submit" class="login-btn">INICIAR SESIÓN</button>
+
+          <div class="extra">
+            <p class="no-cuenta">¿No tienes cuenta aún?</p>
+            <p class="admin-acceso">
+              Solicita el acceso al Administrador para crear tu usuario.
+            </p>
+          </div>
+        </form>
+    </section>
+  </div>
+  </div>
+</body>
+
+</html>

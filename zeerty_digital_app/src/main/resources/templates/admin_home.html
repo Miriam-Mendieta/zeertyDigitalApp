@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Miriam Mendieta" name="author">
+    <title>ZeertyDigital – Panel de Administración</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/admin_home.css}">
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/header_admin :: header_admin}"></th:block>
+
+    <main class="zd-main">
+
+        <section class="zd-card">
+            <h2>Gestión de usuarios</h2>
+
+            <div class="zd-actions">
+                <a href="/admin/lista" class="zd-btn-primary">Ver lista de usuarios</a>
+                <a href="/admin/crear" class="zd-btn-secondary">Dar de alta usuario</a>
+                <a href="/home" class="zd-btn-secondary">Ir a Home</a>
+                <a href="/logout" class="zd-btn-danger">Salir</a>
+            </div>
+        </section>
+
+    </main>
+
+    <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+</body>
+
+</html>

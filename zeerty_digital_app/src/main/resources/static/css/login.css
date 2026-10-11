@@ -1,0 +1,108 @@
+/* Contenedor principal */
+.login-container {
+  width: 100%;
+  max-width: 480px;
+  background: rgba(5, 10, 20, 0.9);
+  padding: 40px 32px;
+  border-radius: 18px;
+  border: 1px solid rgba(70, 160, 255, 0.35);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+  height: 90vh;
+  overflow: hidden;
+  /* elimina scroll */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Encabezado */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+
+/* Formulario */
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-form label {
+  display: block;
+  margin-top: 18px;
+  margin-bottom: 6px;
+  color: var(--color-text);
+  font-size: 0.9rem;
+}
+
+.login-form input {
+  width: 100%;
+  padding: 0px 12px;
+  border-radius: 6px;
+  border: 1px solid rgba(80, 150, 255, 0.4);
+  background: #050811;
+  color: var(--color-text);
+  outline: none;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-form input::placeholder {
+  color: #6f86a8;
+}
+
+/* Enlace recuperar contraseña */
+.forgot {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  cursor: pointer;
+}
+
+/* Botón iniciar sesión */
+.login-btn {
+  margin-top: 30px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(90deg, #3fd5ff, #4b8dff);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+}
+
+/* Sección inferior */
+.extra {
+  margin-top: 28px;
+  text-align: center;
+}
+
+.no-cuenta {
+  color: var(--color-text-soft);
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+}
+
+.admin-acceso {
+  color: var(--color-primary);
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 18px;
+}
