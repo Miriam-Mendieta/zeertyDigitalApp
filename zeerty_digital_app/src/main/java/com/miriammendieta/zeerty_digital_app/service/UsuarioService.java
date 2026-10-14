@@ -123,8 +123,24 @@ public class UsuarioService {
     /**
      * MODIFICAR USUARIO
      */
-    public void modificarUsuario(Usuario usuario) {
-        repo.save(usuario);
+    public void modificarUsuario(Usuario usuarioForm) {
+
+        Usuario usuarioBD = repo.findById(usuarioForm.getIdUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        usuarioBD.setNombre(usuarioForm.getNombre());
+        usuarioBD.setApellidos(usuarioForm.getApellidos());
+        usuarioBD.setEmail(usuarioForm.getEmail());
+        usuarioBD.setTelefono(usuarioForm.getTelefono());
+        usuarioBD.setRol(usuarioForm.getRol());
+        usuarioBD.setEstado(usuarioForm.getEstado());
+
+        // Solo cifrar si el usuario escribió una nueva contraseña
+        if (usuarioForm.getPasswordHash() != null && !usuarioForm.getPasswordHash().isBlank()) {
+            usuarioBD.setPasswordHash(passwordEncoder.encode(usuarioForm.getPasswordHash()));
+        }
+
+        repo.save(usuarioBD);
     }
 
 }

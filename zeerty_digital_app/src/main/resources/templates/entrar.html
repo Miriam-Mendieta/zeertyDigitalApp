@@ -30,28 +30,26 @@ xmlns:th="http://www.thymeleaf.org"
 
 <body>
   <div class="zd-center">
-    <section class="zd-card zd-login-card">
-      <div class="screen">
-        <div class="logo-area">
-          <img th:src="@{/img/logoZeerty.png}" class="logo" alt="ZeertyDigital">
-        </div>
-
-        <button class="enter-btn" onclick="entrar()">ENTRAR</button>
+    <div class="screen">
+      <div class="logo-area">
+        <img th:src="@{/img/logoZeerty.png}" class="logo" alt="ZeertyDigital">
       </div>
-    </section>
+
+      <button class="enter-btn" onclick="entrar()">ENTRAR</button>
+    </div>
   </div>
 </body>
 
-  <script>
-    /* 
-     Redirección hacia el controlador que sirve la vista login.html.
-     En Thymeleaf NO se navega a login.html directamente.
-     Se navega a /login (ruta del controlador).
-     */
-    function entrar() {
-      window.location.href = "/login";
-    }
-  </script>
+<script>
+  /* 
+   Redirección hacia el controlador que sirve la vista login.html.
+   En Thymeleaf NO se navega a login.html directamente.
+   Se navega a /login (ruta del controlador).
+   */
+  function entrar() {
+    window.location.href = "/login";
+  }
+</script>
 </body>
 
 </html>

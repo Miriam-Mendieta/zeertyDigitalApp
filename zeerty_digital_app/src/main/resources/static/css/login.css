@@ -1,15 +1,23 @@
+html,
+body {
+  height: 100vh; /* ocupa toda la pantalla */
+  overflow: hidden; /* sin scroll */
+  display: flex; /* centrado vertical */
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
 /* Contenedor principal */
 .login-container {
   width: 100%;
-  max-width: 480px;
+  max-width:600px;
   background: rgba(5, 10, 20, 0.9);
-  padding: 40px 32px;
+  padding: 10px 40px;
   border-radius: 18px;
   border: 1px solid rgba(70, 160, 255, 0.35);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
-  height: 90vh;
-  overflow: hidden;
-  /* elimina scroll */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,14 +26,13 @@
 /* Encabezado */
 .header {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .logo {
   width: 90px;
   margin-bottom: 10px;
 }
-
 
 /* Formulario */
 .login-form {
@@ -34,7 +41,6 @@
 }
 
 .login-form label {
-  display: block;
   margin-top: 18px;
   margin-bottom: 6px;
   color: var(--color-text);
@@ -43,16 +49,13 @@
 
 .login-form input {
   width: 100%;
-  padding: 0px 12px;
+  padding: 12px;
   border-radius: 6px;
   border: 1px solid rgba(80, 150, 255, 0.4);
   background: #050811;
   color: var(--color-text);
   outline: none;
   font-size: 0.95rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .login-form input::placeholder {
@@ -61,7 +64,6 @@
 
 /* Enlace recuperar contraseña */
 .forgot {
-  display: block;
   margin-top: 8px;
   font-size: 0.85rem;
   color: var(--color-primary);

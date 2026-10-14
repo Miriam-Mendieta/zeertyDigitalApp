@@ -21,7 +21,8 @@ body {
   color: var(--color-text);
   min-height: 100vh;
   font-family: system-ui, "Segoe UI", sans-serif;
-  padding: 20px;
+  padding: 0;
+  overflow-x: hidden; /* solo bloquea scroll horizontal */
 }
 
 /* TITULOS */
@@ -70,11 +71,32 @@ button {
 /* FOOTER GLOBAL */
 .zd-footer {
   width: 100%;
-  text-align: center;
+  padding: 12px 0;
   margin-top: 40px;
-  padding: 20px 0;
-  opacity: 0.8;
+  text-align: center;
+  opacity: 0.75;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
 }
+
+/* Logo del footer  */
+.zd-footer-logo {
+  width: 42px;
+  height: auto;
+  opacity: 0.9;
+}
+
+/* Texto del footer */
+.zd-footer-text {
+  font-size: 0.78rem;
+  color: var(--color-text-soft);
+  letter-spacing: 0.3px;
+  max-width: 90%;
+  line-height: 1.3;
+}
+
 
 .zd-logo {
   width: 70px;

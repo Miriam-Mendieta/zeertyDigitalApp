@@ -19,43 +19,33 @@
 
 <body>
   <div class="zd-center">
-    <section class="zd-card zd-login-card">
-      <div class="login-container">
-        <div class="header">
-          <!-- 
-              th:src="@{/img/logoZeerty.png}"
-             → Thymeleaf genera la ruta correcta hacia la imagen.
-          -->
-          <img th:src="@{/img/logoZeerty.png}" class="logo" alt="ZeertyDigital">
+    <div class="login-container">
 
-          <p class="tagline">Tecnología que acompaña... Simplifica, protege y avanza</p>
+      <div class="header">
+        <img th:src="@{/img/logoZeerty.png}" class="logo" alt="ZeertyDigital">
+        <p class="tagline">Tecnología que acompaña... Simplifica, protege y avanza</p>
+      </div>
+
+      <form class="login-form" th:action="@{/procesar-login}" method="post">
+        <label for="email">Correo electrónico</label>
+        <input id="email" name="email" type="email" placeholder="micorreo@gmail.com" required>
+
+        <label for="pass">Contraseña</label>
+        <input id="pass" name="password" type="password" placeholder="••••••••" required>
+
+        <a class="forgot">¿Has olvidado tu contraseña?</a>
+
+        <button type="submit" class="login-btn">INICIAR SESIÓN</button>
+
+        <div class="extra">
+          <p class="no-cuenta">¿No tienes cuenta aún?</p>
+          <p class="admin-acceso">
+            Solicita el acceso al Administrador para crear tu usuario.
+          </p>
         </div>
+      </form>
 
-        <!-- 
-          Formulario de inicio de sesión
-          th:action="@{/entrar}" → Thymeleaf genera la ruta correcta hacia el endpoint /entrar.
-          method="post" → Se envía la información del formulario mediante el método POST.
-      -->
-        <form class="login-form" th:action="@{/procesar-login}" method="post">
-          <label for="email">Correo electrónico</label>
-          <input id="email" name="email" type="email" placeholder="micorreo@gmail.com" required>
-
-          <label for="pass">Contraseña</label>
-          <input id="pass" name="password" type="password" placeholder="••••••••" required>
-
-          <a class="forgot">¿Has olvidado tu contraseña?</a>
-
-          <button type="submit" class="login-btn">INICIAR SESIÓN</button>
-
-          <div class="extra">
-            <p class="no-cuenta">¿No tienes cuenta aún?</p>
-            <p class="admin-acceso">
-              Solicita el acceso al Administrador para crear tu usuario.
-            </p>
-          </div>
-        </form>
-    </section>
-  </div>
+    </div>
   </div>
 </body>
 

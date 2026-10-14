@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+
+<!-- fragments/form_usuario.html -->
+<div th:fragment="formUsuario">
+    <input type="hidden" th:field="*{idUsuario}">
+    <!-- Nombre + Apellidos -->
+    <div class="zd-row">
+        <div class="zd-col">
+            <div class="zd-form-group">
+                <label>Nombre</label>
+                <input type="text" th:field="*{nombre}">
+            </div>
+        </div>
+        <div class="zd-col">
+            <div class="zd-form-group">
+                <label>Apellidos</label>
+                <input type="text" th:field="*{apellidos}">
+            </div>
+        </div>
+    </div>
+
+    <!-- Email + Teléfono -->
+    <div class="zd-row">
+        <div class="zd-col">
+            <div class="zd-form-group">
+                <label>Email</label>
+                <input type="email" th:field="*{email}">
+            </div>
+        </div>
+        <div class="zd-col">
+            <div class="zd-form-group">
+                <label>Teléfono</label>
+                <input type="text" th:field="*{telefono}">
+            </div>
+        </div>
+    </div>
+
+    <!-- Contraseña -->
+    <div class="zd-form-group">
+        <label>Contraseña</label>
+        <input type="password" th:field="*{passwordHash}">
+    </div>
+
+    <!-- Rol + Estado -->
+    <div class="zd-row">
+        <div class="zd-col">
+            <div class="zd-form-group">
+                <label>Rol</label>
+                <select th:field="*{rol}">
+                    <option value="ADMINISTRACION">Administración</option>
+                    <option value="AUDITORIA">Auditoría</option>
+                    <option value="INVITADO">Invitado</option>
+                    <option value="USUARIO_APP">Usuario App</option>
+                </select>
+            </div>
+        </div>
+        <div class="zd-col">
+            <div class="zd-form-group">
+                <label>Estado</label>
+                <select th:field="*{estado}">
+                    <option value="ACTIVO">Activo</option>
+                    <option value="INACTIVO">Inactivo</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

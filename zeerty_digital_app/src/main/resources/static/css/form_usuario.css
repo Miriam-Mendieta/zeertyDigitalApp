@@ -1,29 +1,20 @@
-/* Fondo general */
-body {
-  background: radial-gradient(circle at top, #0f2b3f 0%, #050811 55%, #020308 100%);
-  color: #e5f4ff;
-  font-family: system-ui, "Segoe UI", sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-/* HEADER */
+/* HEADER compacto */
 .zd-header-create {
   width: 100%;
-  padding: 20px 30px;
+  padding: 5px 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .zd-header-create h1 {
-  color: #3fd5ff;
+  color: var(--color-primary);
   font-size: 22px;
 }
 
 .zd-header-create nav a {
   margin-left: 20px;
-  color: #e5f4ff;
+  color: var(--color-text);
   text-decoration: none;
   font-weight: 600;
 }
@@ -36,22 +27,44 @@ body {
   opacity: 0.8;
 }
 
-/* Centrado de la tarjeta */
+/* Centrado horizontal */
 .zd-center {
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 100px);
+  margin-top: 0;
+  padding-top: 0;
 }
 
-/* Tarjeta */
+
+/* Tarjeta del formulario */
 .zd-card {
   background: rgba(255, 255, 255, 0.05);
-  padding: 30px;
+  padding: 12px 16px;
   border-radius: 12px;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-  max-width: 450px;
+  max-width: 550px;
   width: 100%;
+}
+
+/* Fila de dos columnas */
+.zd-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+/* Columna individual */
+.zd-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Responsive: en móvil vuelve a una columna */
+@media (max-width: 768px) {
+  .zd-row {
+    flex-direction: column;
+  }
 }
 
 /* Grupos del formulario */
@@ -62,51 +75,65 @@ body {
 .zd-form-group label {
   display: block;
   margin-bottom: 6px;
-  color: #9fb7d9;
+  color: var(--color-text-soft);
   font-size: 14px;
 }
 
 /* Inputs y selects */
 .zd-form-group input,
-.zd-form-group select {
+.zd-form-group select,
+.zd-col input,
+.zd-col select {
   width: 100%;
   padding: 12px;
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(255, 255, 255, 0.05);
-  color: #e5f4ff;
+  color: var(--color-text);
   font-size: 15px;
 }
 
 .zd-form-group input:focus,
-.zd-form-group select:focus {
+.zd-form-group select:focus,
+.zd-col input:focus,
+.zd-col select:focus {
   outline: none;
-  border-color: #3fd5ff;
-
+  border-color: var(--color-primary);
 }
 
 /* Opciones del select visibles */
 select option {
   background: #0f1a2b;
-  color: #e5f4ff;
+  color: var(--color-text);
 }
 
-/* Botón crear usuario */
-.zd-btn-create {
-  background: #3fd5ff;
+/* Botón (sirve para crear y modificar) */
+.zd-btn-area {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.zd-btn-create,
+.zd-btn-modify,
+.zd-btn-primary {
+  background: var(--color-primary);
   color: #000;
   padding: 12px 20px;
   border-radius: 8px;
   font-weight: 600;
   width: 100%;
-  text-align: center;
-  display: block;
-  margin-top: 20px;
   transition: 0.2s ease;
   border: none;
 }
 
-.zd-btn-create:hover {
+.zd-btn-create:hover,
+.zd-btn-primary:hover {
   transform: translateY(-3px);
   opacity: 0.9;
 }
+
+/* Footer más cercano */
+.zd-footer {
+  margin-top: 10px;
+}
+
