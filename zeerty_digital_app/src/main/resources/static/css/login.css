@@ -1,8 +1,11 @@
 html,
 body {
-  height: 100vh; /* ocupa toda la pantalla */
-  overflow: hidden; /* sin scroll */
-  display: flex; /* centrado vertical */
+  height: 100vh;
+  /* ocupa toda la pantalla */
+  overflow: hidden;
+  /* sin scroll */
+  display: flex;
+  /* centrado vertical */
   justify-content: center;
   align-items: center;
   padding-top: 50px;
@@ -12,7 +15,7 @@ body {
 /* Contenedor principal */
 .login-container {
   width: 100%;
-  max-width:600px;
+  max-width: 600px;
   background: rgba(5, 10, 20, 0.9);
   padding: 10px 40px;
   border-radius: 18px;
@@ -21,6 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: relative;
 }
 
 /* Encabezado */
@@ -108,3 +112,4 @@ body {
   line-height: 1.4;
   margin-bottom: 18px;
 }
+

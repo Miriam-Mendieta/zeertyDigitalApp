@@ -15,9 +15,4 @@ public class ViewController {
     public String entrar() {
         return "entrar"; // entrar.html
     }
-
-    //@GetMapping("/home")
-   // public String home() {
-   //     return "home"; // home.html
-   // }
 }

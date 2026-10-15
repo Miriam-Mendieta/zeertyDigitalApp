@@ -18,17 +18,13 @@
 
 <body>
 
-    <!-- HEADER ADMIN -->
-    <header class="zd-header-admin">
-        <h1>Panel de Administración</h1>
+    <div th:if="${mensaje}" class="alert" th:classappend="${tipo == 'success'} ? 'alert-success' : (${tipo == 'warning'} ? 'alert-warning' : (${tipo == 'info'} ? 'alert-info' : ''))">
+    <p th:text="${mensaje}"></p>
+</div>
 
-        <nav>
-            <a href="/admin/home">Inicio</a>
-            <a href="/admin/lista">Usuarios</a>
-            <a href="/admin/crear">Crear usuario</a>
-            <a href="/logout" class="logout">Salir</a>
-        </nav>
-    </header>
+
+    <!-- HEADER ADMIN -->
+    <th:block th:replace="~{fragments/header_admin :: header_admin}"></th:block>
 
     <main class="zd-main">
 

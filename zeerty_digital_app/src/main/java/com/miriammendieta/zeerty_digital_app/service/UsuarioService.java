@@ -1,20 +1,15 @@
 package com.miriammendieta.zeerty_digital_app.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.miriammendieta.zeerty_digital_app.model.Usuario;
+import com.miriammendieta.zeerty_digital_app.model.Estado;
+import com.miriammendieta.zeerty_digital_app.model.Rol;
+import com.miriammendieta.zeerty_digital_app.repository.UsuarioRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.miriammendieta.zeerty_digital_app.model.Estado;
-import com.miriammendieta.zeerty_digital_app.model.Rol;
-import com.miriammendieta.zeerty_digital_app.model.Usuario;
-import com.miriammendieta.zeerty_digital_app.repository.UsuarioRepository;
+import java.util.List;
+import java.util.Optional;
 
-/**
- * Servicio que contiene la lógica de negocio relacionada con los usuarios.
- * Inyección por constructor.
- */
 @Service
 public class UsuarioService {
 
@@ -26,81 +21,58 @@ public class UsuarioService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    /**
-     * LOGIN
-     * 1. Busca el usuario por email.
-     * 2. Si no existe, devuelve null.
-     * 3. Si existe, compara la contraseña.
-     * 4. Si coincide, devuelve el usuario.
-     * 5. Si no coincide, devuelve null.
-     */
+    // LOGIN
     public Usuario login(String email, String password) {
-
-        // findByEmail devuelve Optional<Usuario>
         Optional<Usuario> uOpt = repo.findByEmail(email);
+        if (uOpt.isEmpty()) return null;
 
-        // Si no existe --> login inválido
-        if (uOpt.isEmpty()) {
-            return null;
-        }
-
-        // Obtener el usuario real
         Usuario u = uOpt.get();
-
-        // Comparar contraseña cifrada con la introducida
-        if (passwordEncoder.matches(password, u.getPasswordHash())) {
-            return u;
-        }
-
-        return null;
+        return passwordEncoder.matches(password, u.getPasswordHash()) ? u : null;
     }
 
-    /**
-     * CREAR USUARIO
-     */
-    public Usuario crearUsuario(String nombre, String apellidos, String email,
-            String passwordHash, String telefono,
-            Rol rol, Estado estado) {
+    // COMPROBAR SI EL EMAIL YA EXISTE
+    public boolean emailExiste(String email) {
+        return repo.findByEmail(email).isPresent();
+    }
 
-        // Encripta la contraseña ANTES de crear el usuario
+    // CREAR USUARIO
+    public Usuario crearUsuario(String nombre, String apellidos, String email,
+                                String passwordHash, String telefono,
+                                Rol rol, Estado estado) {
+
+        if (emailExiste(email)) {
+            throw new RuntimeException("El email ya está registrado");
+        }
+
         String passwordEncriptada = passwordEncoder.encode(passwordHash);
 
-        Usuario nuevo = new Usuario(nombre, apellidos, email, passwordEncriptada, telefono, rol, estado);
+        Usuario nuevo = new Usuario(nombre, apellidos, email,
+                passwordEncriptada, telefono, rol, estado);
+
         return repo.save(nuevo);
     }
 
-    /**
-     * LISTAR TODOS LOS USUARIOS
-     */
+    // LISTAR TODOS
     public List<Usuario> listarTodos() {
         return repo.findAll();
     }
 
-    /**
-     * BUSCAR POR ID
-     */
+    // BUSCAR POR ID
     public Usuario buscarPorId(Integer id) {
         return repo.findById(id).orElse(null);
     }
 
-    /**
-     * BUSCAR POR EMAIL
-     * Devuelve Usuario o null.
-     */
+    // BUSCAR POR EMAIL
     public Usuario buscarPorEmail(String email) {
         return repo.findByEmail(email).orElse(null);
     }
 
-    /**
-     * ELIMINAR USUARIO
-     */
+    // ELIMINAR
     public void eliminarUsuario(Integer id) {
         repo.deleteById(id);
     }
 
-    /**
-     * DESACTIVAR USUARIO
-     */
+    // DESACTIVAR
     public void desactivarUsuario(Integer id) {
         Usuario u = buscarPorId(id);
         if (u != null) {
@@ -109,9 +81,7 @@ public class UsuarioService {
         }
     }
 
-    /**
-     * ACTIVAR USUARIO
-     */
+    // ACTIVAR
     public void activarUsuario(Integer id) {
         Usuario u = buscarPorId(id);
         if (u != null) {
@@ -120,13 +90,17 @@ public class UsuarioService {
         }
     }
 
-    /**
-     * MODIFICAR USUARIO
-     */
+    // MODIFICAR
     public void modificarUsuario(Usuario usuarioForm) {
 
         Usuario usuarioBD = repo.findById(usuarioForm.getIdUsuario())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Validación de email duplicado
+        Usuario existente = buscarPorEmail(usuarioForm.getEmail());
+        if (existente != null && !existente.getIdUsuario().equals(usuarioForm.getIdUsuario())) {
+            throw new RuntimeException("El email ya está registrado por otro usuario");
+        }
 
         usuarioBD.setNombre(usuarioForm.getNombre());
         usuarioBD.setApellidos(usuarioForm.getApellidos());
@@ -135,12 +109,10 @@ public class UsuarioService {
         usuarioBD.setRol(usuarioForm.getRol());
         usuarioBD.setEstado(usuarioForm.getEstado());
 
-        // Solo cifrar si el usuario escribió una nueva contraseña
         if (usuarioForm.getPasswordHash() != null && !usuarioForm.getPasswordHash().isBlank()) {
             usuarioBD.setPasswordHash(passwordEncoder.encode(usuarioForm.getPasswordHash()));
         }
 
         repo.save(usuarioBD);
     }
-
 }

@@ -28,25 +28,28 @@
 
       <form class="login-form" th:action="@{/procesar-login}" method="post">
         <label for="email">Correo electrónico</label>
-        <input id="email" name="email" type="email" placeholder="micorreo@gmail.com" required>
+        <input id="email" name="username" type="email" placeholder="micorreo@gmail.com" required>
 
         <label for="pass">Contraseña</label>
         <input id="pass" name="password" type="password" placeholder="••••••••" required>
 
-        <a class="forgot">¿Has olvidado tu contraseña?</a>
-
         <button type="submit" class="login-btn">INICIAR SESIÓN</button>
-
+        <div th:if="${param.error}"
+          style="color: #dc2626 !important; text-align: center !important; font-size: 0.9rem !important; margin-bottom: 1rem !important; font-weight: 600 !important; display: block !important; width: 100% !important;">
+          Correo o contraseña incorrectos.
+        </div>
         <div class="extra">
           <p class="no-cuenta">¿No tienes cuenta aún?</p>
           <p class="admin-acceso">
             Solicita el acceso al Administrador para crear tu usuario.
           </p>
+
         </div>
       </form>
 
     </div>
   </div>
+
 </body>
 
 </html>

@@ -37,29 +37,36 @@ public class LoginController {
     public String login(@RequestParam String email,
             @RequestParam String password,
             Model model) {
-
-        System.out.println(">>> POST LOGIN RECIBIDO");
-
         Usuario u = usuarioRepository.findByEmail(email).orElse(null);
-        System.out.println(">>> USUARIO ENCONTRADO: " + u);
-
         if (u == null) {
             model.addAttribute("error", "Usuario no encontrado");
             return "login";
         }
 
         boolean ok = passwordEncoder.matches(password, u.getPasswordHash());
-        System.out.println(">>> CONTRASEÑA COINCIDE: " + ok);
 
         if (!ok) {
             model.addAttribute("error", "Contraseña incorrecta");
             return "login";
         }
 
-        if (u.getRol() == Rol.ADMINISTRACION) {
-            return "redirect:/admin/home";
-        } else {
-            return "redirect:/home";
+        Rol rol = u.getRol();
+
+        switch (rol) {
+            case ADMINISTRACION:
+                return "redirect:/admin/home";
+
+            case AUDITORIA:
+                return "redirect:/auditoria/home";
+
+            case USUARIO_APP:
+                return "redirect:/home";
+
+            case INVITADO:
+                return "redirect:/home";
+
+            default:
+                return "redirect:/login";
         }
 
     }
