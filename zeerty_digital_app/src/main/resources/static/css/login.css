@@ -113,3 +113,43 @@ body {
   margin-bottom: 18px;
 }
 
+/* Contenedor relativo para posicionar el icono dentro del input */
+.password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Ocultamos el checkbox físicamente pero lo dejamos interactivo */
+.toggle-checkbox {
+  display: none;
+}
+
+/* Estilo y posicionamiento del icono del candado */
+.toggle-icon {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+  font-size: 1.3rem;
+  user-select: none;
+}
+
+/* Lógica CSS pura: Cuando el checkbox está marcado, mostramos la contraseña */
+.toggle-checkbox:checked ~ .pass-field {
+  -webkit-text-security: none !important;
+}
+
+/* Cambio del icono del candado al estar marcado */
+.toggle-checkbox:checked ~ .toggle-icon::before {
+  content: "🔓";
+}
+
+/* Ocultar el emoji original cuando se usa el pseudo-elemento para cambiarlo */
+.toggle-checkbox:checked ~ .toggle-icon {
+  font-size: 0; /* Oculta el texto 🔒 original */
+}
+.toggle-checkbox:checked ~ .toggle-icon::before {
+  content: "🔓";
+  font-size: 1.3rem; /* Restaura el tamaño para el emoji abierto */
+}

@@ -30,14 +30,25 @@
         <label for="email">Correo electrónico</label>
         <input id="email" name="username" type="email" placeholder="micorreo@gmail.com" required>
 
+
         <label for="pass">Contraseña</label>
-        <input id="pass" name="password" type="password" placeholder="••••••••" required>
+        <div class="password-wrapper">
+          <!-- Checkbox oculto  -->
+          <input type="checkbox" id="toggle-pass" class="toggle-checkbox">
+
+          <!-- Campo de contraseña  -->
+          <input id="pass" class="pass-field" name="password" type="password" placeholder="••••••••" required>
+
+          <!-- Icono convertido en label conectado al checkbox -->
+          <label for="toggle-pass" class="toggle-icon" title="Mostrar/Ocultar contraseña">🔒</label>
+        </div>
 
         <button type="submit" class="login-btn">INICIAR SESIÓN</button>
         <div th:if="${param.error}"
           style="color: #dc2626 !important; text-align: center !important; font-size: 0.9rem !important; margin-bottom: 1rem !important; font-weight: 600 !important; display: block !important; width: 100% !important;">
           Correo o contraseña incorrectos.
         </div>
+
         <div class="extra">
           <p class="no-cuenta">¿No tienes cuenta aún?</p>
           <p class="admin-acceso">
@@ -49,7 +60,12 @@
 
     </div>
   </div>
-
+  <script>
+    document.getElementById("toggle-pass").onclick = () => {
+      const input = document.getElementById("pass");
+      input.type = input.type === "password" ? "text" : "password";
+    };
+  </script>
 </body>
 
 </html>
