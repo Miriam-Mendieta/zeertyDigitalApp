@@ -29,9 +29,21 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-    public String mostrarLogin() {
-        return "login";
+public String login(Model model,
+                    @RequestParam(required = false) String inactivo,
+                    @RequestParam(required = false) String error) {
+
+    if (inactivo != null) {
+        model.addAttribute("mensajeError", "Usuario inactivo. Contacte con el administrador.");
     }
+
+    if (error != null) {
+        model.addAttribute("mensajeError", "Usuario o contraseña incorrectos.");
+    }
+
+    return "login";
+}
+
 
     @PostMapping("/procesar-login")
     public String login(@RequestParam String email,
