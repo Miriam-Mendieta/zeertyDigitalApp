@@ -1,20 +1,15 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head></head>
-
-<body>
 <th:block th:fragment="header_user">
     <header class="zd-header">
         <div class="zd-header-inner">
             <h1>ZeertyDigital</h1>
 
             <nav class="zd-nav">
-                <a href="/home">Inicio</a>
-                <a href="/perfil">Mi perfil</a>
-                <a href="/logout">Cerrar sesión</a>
+                <a th:href="@{/home}">Inicio</a>
+                <a th:href="@{/perfil}">Mi perfil</a>
+                <a th:href="@{/logout}">Cerrar sesión</a>
             </nav>
         </div>
     </header>
 </th:block>
-</body>
-</html>
+
+
