@@ -16,10 +16,15 @@ public class InactivoFailureHandler implements AuthenticationFailureHandler {
                                         AuthenticationException exception)
             throws IOException {
 
-        if (exception instanceof DisabledException) {
+        // Spring Security envuelve DisabledException dentro de InternalAuthenticationServiceException
+        Throwable causa = exception.getCause();
+
+        if (causa instanceof DisabledException) {
             response.sendRedirect("/login?inactivo");
-        } else {
-            response.sendRedirect("/login?error");
+            return;
         }
+
+        response.sendRedirect("/login?error");
     }
 }
+

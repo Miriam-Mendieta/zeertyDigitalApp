@@ -3,10 +3,10 @@ package com.miriammendieta.zeerty_digital_app.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import com.miriammendieta.zeerty_digital_app.security.InactivoFailureHandler;
-
 
 /*
  * Configuración de seguridad de Spring Security.
@@ -30,7 +30,9 @@ public class SecurityConfig {
 
         http
                 .csrf(csrf -> csrf.disable())
-                .userDetailsService(customUserDetailsService) // ← funciona perfecto
+                // Servicio que carga el usuario desde la BD
+                .userDetailsService(customUserDetailsService)
+                // Rutas públicas y privadas
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/", "/index", "/entrar", "/login", "/procesar-login",
                                 "/css/**", "/js/**", "/img/**")
@@ -40,6 +42,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                     )
 
+                 // Configuración del login
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/procesar-login")
@@ -47,13 +50,27 @@ public class SecurityConfig {
                         .failureHandler(new InactivoFailureHandler())
                         .permitAll()
                     )
-
+                // Configuración de logout
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .logoutSuccessUrl("/login"));
+        
+                http.exceptionHandling(ex -> ex
+                    .authenticationEntryPoint((request, response, authException) -> {
+                        
+                         Throwable causa = authException.getCause();
 
+                        if (causa instanceof DisabledException) {
+                            response.sendRedirect("/login?inactivo");
+                            return;
+            }
+            // Usuario o contraseña incorrectos
+            response.sendRedirect("/login?error");
+        })
+    );
+    
         return http.build();
     }
 }
