@@ -48,6 +48,10 @@
           style="color: #dc2626 !important; text-align: center !important; font-size: 0.9rem !important; margin-bottom: 1rem !important; font-weight: 600 !important; display: block !important; width: 100% !important;">
           Correo o contraseña incorrectos.
         </div>
+        <div th:if="${param.inactivo}"
+          style="color: #dc2626 !important; text-align: center !important; font-size: 0.9rem !important; margin-bottom: 1rem !important; font-weight: 600 !important; display: block !important; width: 100% !important;">
+          Tu cuenta está desactivada. Contacta al Administrador/a.
+        </div>
 
         <div class="extra">
           <p class="no-cuenta">¿No tienes cuenta aún?</p>
