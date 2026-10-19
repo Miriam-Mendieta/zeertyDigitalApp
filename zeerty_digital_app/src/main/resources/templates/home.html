@@ -25,17 +25,10 @@ Permite usar atributos como th:href, th:src, th:text, etc.
 <body>
   <th:block th:replace="fragments/header_user :: header_user"></th:block>
 
-  <div class="zd-container">
-      <div class="panel-header">
-    <h1>Panel de Activos</h1>
+  <h1>Bienvenid@ a ZeertyDigital</h1>
+  <p>Aquí comienza la app</p>
 
-    <p class="user-welcome">
-        Usuario: <strong th:text="${usuario.nombre}">Nombre Usuario</strong>
-    </p>
-</div>
-  </div>
-
-  <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+  <th:block th:replace="fragments/footer :: footer"></th:block>
 
 </body>
 
