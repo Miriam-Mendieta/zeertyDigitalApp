@@ -1,45 +1,74 @@
-/* Contenedor general de la pantalla home */
-.home-container {
-  width: 100%;
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 20px;
-  color: var(--color-text);
+.tabla-activos {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 0.95rem;
 }
 
 /* Cabecera */
-.home-header {
-  text-align: center;
-  margin-bottom: 30px;
+.tabla-activos thead {
+    background: rgba(63, 213, 255, 0.15);
 }
 
-.home-header h1 {
-  font-size: 1.8rem;
-  color: var(--color-primary);
+.tabla-activos th {
+    padding: 12px;
+    text-align: left;
+    color: var(--color-primary);
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Tarjetas / módulos */
-.card {
-  background: rgba(5, 10, 20, 0.9);
-  border: 1px solid rgba(70, 160, 255, 0.35);
-  border-radius: 14px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+/* Filas */
+.tabla-activos td {
+    padding: 12px;
+    color: var(--color-text);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Botones dentro de home */
-.home-btn {
-  display: inline-block;
-  padding: 12px 20px;
-  border-radius: 999px;
-  background: linear-gradient(90deg, var(--color-primary), var(--color-secondary));
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: 0.2s;
+/* Alternancia de filas */
+.tabla-activos tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
 }
 
-.home-btn:hover {
-  transform: translateY(-2px);
+/* Hover */
+.tabla-activos tbody tr:hover {
+    background: rgba(63, 213, 255, 0.08);
+    transition: 0.2s;
+}
+
+/* Botones */
+.tabla-activos button {
+    background: var(--color-secondary);
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 0.85rem;
+    cursor: pointer;
+    margin-right: 6px;
+    transition: 0.2s;
+}
+
+.tabla-activos button:hover {
+    background: var(--color-primary);
+    transform: translateY(-2px);
+}
+.btn-admin {
+    background: #444;
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 20px;
+    transition: 0.2s;
+}
+
+.btn-admin:hover {
+    background: var(--color-primary);
+    transform: translateY(-2px);
 }

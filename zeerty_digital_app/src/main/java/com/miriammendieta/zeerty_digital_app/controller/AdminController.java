@@ -1,5 +1,7 @@
 package com.miriammendieta.zeerty_digital_app.controller;
 
+import java.security.Principal;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,15 +25,17 @@ public class AdminController {
         this.usuarioService = usuarioService;
     }
 
-    // HOME DEL ADMIN
     @GetMapping("/home")
-    public String homeAdmin(HttpServletResponse response) {
+    public String homeAdmin(Model model, Principal principal, HttpServletResponse response) {
 
         response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Expires", "0");
 
-        return "admin/home"; // templates/admin/home.html
+        Usuario usuario = usuarioService.buscarPorEmail(principal.getName());
+        model.addAttribute("usuario", usuario);
+
+        return "admin/home";
     }
 
     // LISTA DE USUARIOS
