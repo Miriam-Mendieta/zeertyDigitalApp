@@ -2,9 +2,12 @@
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <!-- 
 xmlns:th="http://www.thymeleaf.org"
-Activa el uso de Thymeleaf en este documento.
-Permite usar atributos como th:href, th:src, th:text, etc.
+* Activa el “espacio de nombres” de Thymeleaf.
+* Permite usar atributos especiales como th:href, th:src, th:text, th:each, etc.
+* Sin esto, Thymeleaf no reconoce sus propias funciones.
 -->
+
+<!-- plantilla para maquetar la página de inicio del usuario, con el listado de activos digitales -->
 
 <head>
   <meta charset="UTF-8">
@@ -18,16 +21,58 @@ Permite usar atributos como th:href, th:src, th:text, etc.
   <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
   <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
 
-
+  <!-- CSS -->
   <link rel="stylesheet" th:href="@{/css/global.css}">
   <link rel="stylesheet" th:href="@{/css/home.css}">
+</head>
 
 <body>
+
+  <!-- HEADER -->
   <th:block th:replace="fragments/header_user :: header_user"></th:block>
 
-  <h1>Bienvenid@ a ZeertyDigital</h1>
-  <p>Aquí comienza la app</p>
+  <!-- CONTENIDO PRINCIPAL -->
+  <div class="zd-container">
 
+    <!-- PANEL DE ACTIVOS DIGITALES -->
+    <div class="panel-header">
+      <h1>Activos Digitales</h1>
+
+
+    </div>
+
+    <div class="panel-list">
+      <table class="tabla-activos">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Categoría</th>
+            <th>Fecha de alta</th>
+            <th>Fecha de caducidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>Ejemplo Activo</td>
+            <td>Documento</td>
+            <td>2026-10-19</td>
+            <td>2027-10-19</td>
+            <td>
+              <button>Ver</button>
+              <button>Editar</button>
+              <button>Eliminar</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
   <th:block th:replace="fragments/footer :: footer"></th:block>
 
 </body>

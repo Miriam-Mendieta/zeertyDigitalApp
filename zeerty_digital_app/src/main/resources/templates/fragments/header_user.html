@@ -1,8 +1,8 @@
 <th:block th:fragment="header_user">
     <header class="zd-header">
         <div class="zd-header-inner">
-            <h1>ZeertyDigital</h1>
-
+                <h1>Panel de Gestión</h1>
+                <p th:if="${session.usuario != null}" th:text="|Bienvenid@, ${session.usuario.nombre}|"></p>
             <nav class="zd-nav">
                 <a th:href="@{/home}">Inicio</a>
                 <a th:href="@{/perfil}">Mi perfil</a>
@@ -11,4 +11,3 @@
         </div>
     </header>
 </th:block>
-
