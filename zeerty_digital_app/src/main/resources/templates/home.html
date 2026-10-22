@@ -30,56 +30,53 @@ xmlns:th="http://www.thymeleaf.org"
 
   <!-- HEADER -->
   <th:block th:replace="fragments/header_user :: header_user"></th:block>
-  
+
 
   <!-- CONTENIDO PRINCIPAL -->
   <div class="zd-container">
     <div th:if="${usuario.rol.name() == 'ADMINISTRACION'}" class="panel-actions">
-    <a class="btn-admin" th:href="@{/admin/home}">
-      ← Volver a Administración
-    </a>
-  </div>
-
-    <!-- PANEL DE ACTIVOS DIGITALES -->
-    <div class="panel-header">
-      <h1>Activos Digitales</h1>
-
-
+      <a class="btn-admin" th:href="@{/admin/home}">
+        ← Volver a Administración
+      </a>
     </div>
+
 
     <div class="panel-list">
-      <table class="tabla-activos">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Categoría</th>
-            <th>Fecha de alta</th>
-            <th>Fecha de caducidad</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
+      <!-- PANEL DE ACTIVOS DIGITALES -->
+      <div class="panel-header">
+        <h1>Activos Digitales</h1>
+        <table class="tabla-activos">
+          <thead>
+            <tr>
+              <th>Nombre</th>
+              <th>Categoría</th>
+              <th>Fecha de alta</th>
+              <th>Fecha de caducidad</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr>
-            <td>Ejemplo Activo</td>
-            <td>Documento</td>
-            <td>2026-10-19</td>
-            <td>2027-10-19</td>
-            <td>
-              <button>Ver</button>
-              <button>Editar</button>
-              <button>Eliminar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+          <tbody>
+            <tr>
+              <td>Ejemplo Activo</td>
+              <td>Documento</td>
+              <td>2026-10-19</td>
+              <td>2027-10-19</td>
+              <td>
+                <button>Ver</button>
+                <button>Editar</button>
+                <button>Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
 
     </div>
 
-  </div>
-
-  <!-- FOOTER -->
-  <th:block th:replace="fragments/footer :: footer"></th:block>
+    <!-- FOOTER -->
+    <th:block th:replace="fragments/footer :: footer"></th:block>
 
 </body>
 
