@@ -16,8 +16,10 @@ public class ActivoDigital {
     @Column(nullable = false, length = 150)
     private String nombre;
 
-    @Column(nullable = false, length = 50)
-    private String categoria;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CategoriaActivo categoria;  
 
     @Column(columnDefinition = "TEXT")
     private String descripcion;
@@ -56,11 +58,11 @@ public class ActivoDigital {
         this.nombre = nombre;
     }
 
-    public String getCategoria() {
+    public CategoriaActivo getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(String categoria) {
+    public void setCategoria(CategoriaActivo categoria) {
         this.categoria = categoria;
     }
 

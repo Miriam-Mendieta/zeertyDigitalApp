@@ -101,7 +101,7 @@
   border-color: var(--color-primary);
 }
 
-/* Opciones del select visibles */
+/* Opciones del select */
 select option {
   background: #0f1a2b;
   color: var(--color-text);

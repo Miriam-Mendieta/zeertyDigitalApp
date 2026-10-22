@@ -1,9 +1,10 @@
 package com.miriammendieta.zeerty_digital_app.model;
 
 /**
- * CatgoriaActivo
+ * CategoriaActivo
  */
-public enum CatgoriaActivo {
+public enum CategoriaActivo {
+   
     DOCUMENTOS,
     FOTOS,
     VIDEOS,
@@ -13,3 +14,4 @@ public enum CatgoriaActivo {
     DISPOSITIVOS,
     OTROS
 }
+

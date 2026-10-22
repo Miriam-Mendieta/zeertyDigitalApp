@@ -9,13 +9,18 @@ import com.miriammendieta.zeerty_digital_app.repository.ActivoDigitalRepository;
 @Service
 public class ActivoDigitalService {
 
-    private final ActivoDigitalRepository repo = null;
+    private final ActivoDigitalRepository repo;
+
+    public ActivoDigitalService(ActivoDigitalRepository repo) {
+        this.repo = repo;
+    }
 
     public List<ActivoDigital> listar() {
-        return repo.findAll(); // LISTADO DE LA BD
+        return repo.findAll();
     }
 
     public void guardar(ActivoDigital activo) {
         repo.save(activo);
     }
 }
+

@@ -19,12 +19,21 @@ import jakarta.servlet.http.HttpSession;
 @RequestMapping("/activos")
 public class ActivoDigitalController {
 
-    private final ActivoDigitalService service = new ActivoDigitalService();
+    private final ActivoDigitalService service;
+
+    public ActivoDigitalController(ActivoDigitalService service) {
+        this.service = service;
+    }
 
     @GetMapping("/home")
-    public String home(Model model) {
+    public String home(Model model, HttpSession session) {
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        model.addAttribute("usuario", usuario);
         model.addAttribute("listaActivos", service.listar());
-        return "home"; // home.html
+
+        return "home";
     }
 
     @GetMapping("/crear")
@@ -38,10 +47,8 @@ public class ActivoDigitalController {
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-        // Asignar el usuario real
         activo.setId_usuario(usuario.getIdUsuario());
 
-        // Si no ponen fecha de alta, se pone hoy
         if (activo.getFecha_alta() == null) {
             activo.setFecha_alta(LocalDate.now());
         }
@@ -50,5 +57,4 @@ public class ActivoDigitalController {
 
         return "redirect:/activos/home";
     }
-
 }
