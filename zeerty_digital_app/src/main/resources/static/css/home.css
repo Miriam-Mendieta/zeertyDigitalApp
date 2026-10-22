@@ -1,5 +1,5 @@
 .tabla-activos {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     border-collapse: collapse;
     background: rgba(255, 255, 255, 0.03);
@@ -9,9 +9,10 @@
     font-size: 0.95rem;
 }
 
+/* Centrar título */
 .panel-header h1 {
     margin: 0;
-    text-align: center;    /* 🔹 Centra el texto del título */
+    text-align: center;
 }
 
 /* Cabecera */
@@ -34,7 +35,7 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Alternancia de filas */
+/* Alternancia */
 .tabla-activos tbody tr:nth-child(even) {
     background: rgba(255, 255, 255, 0.02);
 }
@@ -45,36 +46,47 @@
     transition: 0.2s;
 }
 
-/* Botones */
-.tabla-activos button {
-    background: var(--color-secondary);
-    border: none;
+/* Botones de acciones */
+.btn-ver,
+.btn-editar,
+.btn-eliminar,
+.btn-crear {
+    display: inline-block;
     padding: 6px 12px;
     border-radius: 6px;
-    color: #fff;
     font-size: 0.85rem;
-    cursor: pointer;
+    text-decoration: none;
+    color: #fff;
     margin-right: 6px;
     transition: 0.2s;
 }
 
-.tabla-activos button:hover {
+/* Botón crear */
+.btn-crear {
     background: var(--color-primary);
-    transform: translateY(-2px);
-}
-.btn-admin {
-    background: #444;
-    color: #fff;
-    padding: 8px 14px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 0.9rem;
-    display: inline-block;
-    margin-bottom: 20px;
-    transition: 0.2s;
+    margin-bottom: 15px;
+    margin-left: 35px;
 }
 
-.btn-admin:hover {
-    background: var(--color-primary);
+/* Botón ver */
+.btn-ver {
+    background: #4caf50;
+}
+
+/* Botón editar */
+.btn-editar {
+    background: #2196f3;
+}
+
+/* Botón eliminar */
+.btn-eliminar {
+    background: #e53935;
+}
+
+.btn-ver:hover,
+.btn-editar:hover,
+.btn-eliminar:hover,
+.btn-crear:hover {
     transform: translateY(-2px);
+    opacity: 0.85;
 }

@@ -18,6 +18,6 @@ public class ActivoDigitalController {
     @GetMapping("/home")
     public String home(Model model) {
         model.addAttribute("listaActivos", service.listar());
-        return "home"; // tu home.html
+        return "home"; // home.html
     }
 }
