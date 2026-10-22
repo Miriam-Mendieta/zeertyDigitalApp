@@ -41,39 +41,52 @@ xmlns:th="http://www.thymeleaf.org"
     </div>
 
 
-    <div class="panel-list">
-      <!-- PANEL DE ACTIVOS DIGITALES -->
-      <div class="panel-header">
-        <h1>Activos Digitales</h1>
-        <table class="tabla-activos">
-          <thead>
-            <tr>
-              <th>Nombre</th>
-              <th>Categoría</th>
-              <th>Fecha de alta</th>
-              <th>Fecha de caducidad</th>
-              <th>Acciones</th>
-            </tr>
-          </thead>
+   <div class="panel-list">
+  <!-- PANEL DE ACTIVOS DIGITALES -->
+  <div class="panel-header">
+    <h1>Activos Digitales</h1>
 
-          <tbody>
-            <tr>
-              <td>Ejemplo Activo</td>
-              <td>Documento</td>
-              <td>2026-10-19</td>
-              <td>2027-10-19</td>
-              <td>
-                <button>Ver</button>
-                <button>Editar</button>
-                <button>Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+    <!-- Botón para crear un nuevo activo -->
+    <a class="btn-crear" th:href="@{/activos/crear}">+ Añadir Activo</a>
 
-      </div>
+    <table class="tabla-activos">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Categoría</th>
+          <th>Fecha de alta</th>
+          <th>Fecha de caducidad</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
 
-    </div>
+      <tbody>
+        <!-- RECORRIDO DE ACTIVOS REALES -->
+        <tr th:each="activo : ${listaActivos}">
+          <td th:text="${activo.nombre}"></td>
+          <td th:text="${activo.categoria}"></td>
+          <td th:text="${activo.fechaAlta}"></td>
+          <td th:text="${activo.fechaCaducidad}"></td>
+
+          <td class="acciones">
+            <a class="btn-ver" th:href="@{'/activos/ver/' + ${activo.id_activo}}">Ver</a>
+            <a class="btn-editar" th:href="@{'/activos/editar/' + ${activo.id_activo}}">Editar</a>
+            <a class="btn-eliminar" th:href="@{'/activos/eliminar/' + ${activo.id_activo}}"
+               onclick="return confirm('¿Seguro que deseas eliminar este activo?');">
+              Eliminar
+            </a>
+          </td>
+        </tr>
+
+        <!-- Si no hay activos -->
+        <tr th:if="${listaActivos.size() == 0}">
+          <td colspan="5" class="sin-activos">No tienes activos registrados.</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>
 
     <!-- FOOTER -->
     <th:block th:replace="fragments/footer :: footer"></th:block>
