@@ -14,4 +14,8 @@ public class ActivoDigitalService {
     public List<ActivoDigital> listar() {
         return repo.findAll(); // LISTADO DE LA BD
     }
+
+    public void guardar(ActivoDigital activo) {
+        repo.save(activo);
+    }
 }
