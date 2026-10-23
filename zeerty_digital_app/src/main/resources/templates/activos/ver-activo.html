@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Activo Digital</title>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/form_activoDigital.css}">
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/header_user :: header_user}"></th:block>
+    <h1>Detalle del Activo</h1>
+
+    <p><strong>Nombre:</strong> <span th:text="${activo.nombre}"></span></p>
+    <p><strong>Categoría:</strong> <span th:text="${activo.categoria}"></span></p>
+    <p><strong>Descripción:</strong> <span th:text="${activo.descripcion}"></span></p>
+    <p><strong>Fecha alta:</strong> <span th:text="${activo.fecha_alta}"></span></p>
+    <p><strong>Fecha caducidad:</strong> <span th:text="${activo.fecha_caducidad}"></span></p>
+    <p><strong>Estado:</strong> <span th:text="${activo.estado}"></span></p>
+
+    <a th:href="@{/activos/home}">Volver</a>
+    <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+</body>
+</html>

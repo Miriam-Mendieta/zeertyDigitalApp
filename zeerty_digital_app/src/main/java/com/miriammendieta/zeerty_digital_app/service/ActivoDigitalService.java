@@ -22,5 +22,13 @@ public class ActivoDigitalService {
     public void guardar(ActivoDigital activo) {
         repo.save(activo);
     }
+
+    public ActivoDigital buscarPorId(Integer id) {
+        return repo.findById(id).orElse(null);
+    }
+
+    public void eliminar(Integer id) {
+        repo.deleteById(id);
+    }
 }
 

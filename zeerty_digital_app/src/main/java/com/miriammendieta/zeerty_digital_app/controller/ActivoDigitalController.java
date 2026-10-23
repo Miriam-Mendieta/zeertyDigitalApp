@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
@@ -52,9 +53,33 @@ public class ActivoDigitalController {
         if (activo.getFecha_alta() == null) {
             activo.setFecha_alta(LocalDate.now());
         }
-
         service.guardar(activo);
+        return "redirect:/activos/home";
+    }
 
+    @GetMapping("/ver/{id}")
+    public String ver(@PathVariable Integer id, Model model) {
+        ActivoDigital activo = service.buscarPorId(id);
+        model.addAttribute("activo", activo);
+        return "activos/ver-activo";
+    }
+
+    @GetMapping("/editar/{id}")
+    public String editar(@PathVariable Integer id, Model model) {
+        ActivoDigital activo = service.buscarPorId(id);
+        model.addAttribute("activo", activo);
+        return "activos/editar-activo";
+    }
+
+    @PostMapping("/actualizar")
+    public String actualizar(@ModelAttribute ActivoDigital activo) {
+        service.guardar(activo);
+        return "redirect:/activos/home";
+    }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminar(@PathVariable Integer id) {
+        service.eliminar(id);
         return "redirect:/activos/home";
     }
 }
