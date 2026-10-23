@@ -42,7 +42,7 @@ public class CustomUserDetailsService implements UserDetailsService {
             throw new DisabledException("Usuario inactivo. Contacte con el administrador/a.");
         }
 
-        // Devolver nuestro UserDetails personalizado
+        // Devuelve UserDetails personalizado
         return new UsuarioDetails(usuario);
     }
 }

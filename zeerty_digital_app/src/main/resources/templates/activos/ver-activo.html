@@ -11,22 +11,60 @@
     <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
 
     <link rel="stylesheet" th:href="@{/css/global.css}">
-    <link rel="stylesheet" th:href="@{/css/form_activoDigital.css}">
+    <link rel="stylesheet" th:href="@{/css/ver-activo.css}">
 </head>
 
 <body>
 
     <th:block th:replace="~{fragments/header_user :: header_user}"></th:block>
-    <h1>Detalle del Activo</h1>
 
-    <p><strong>Nombre:</strong> <span th:text="${activo.nombre}"></span></p>
-    <p><strong>Categoría:</strong> <span th:text="${activo.categoria}"></span></p>
-    <p><strong>Descripción:</strong> <span th:text="${activo.descripcion}"></span></p>
-    <p><strong>Fecha alta:</strong> <span th:text="${activo.fecha_alta}"></span></p>
-    <p><strong>Fecha caducidad:</strong> <span th:text="${activo.fecha_caducidad}"></span></p>
-    <p><strong>Estado:</strong> <span th:text="${activo.estado}"></span></p>
+    <div class="zd-container">
 
-    <a th:href="@{/activos/home}">Volver</a>
+        <div class="card-detalle">
+            <h2 class="titulo-detalle">Detalle del Activo</h2>
+
+            <div class="detalle-item">
+                <span class="label">Nombre:</span>
+                <span class="valor" th:text="${activo.nombre}"></span>
+            </div>
+
+            <div class="detalle-item">
+                <span class="label">Categoría:</span>
+                <span class="valor" th:text="${activo.categoria}"></span>
+            </div>
+
+            <div class="detalle-item">
+                <span class="label">Descripción:</span>
+                <span class="valor" th:text="${activo.descripcion}"></span>
+            </div>
+
+            <div class="detalle-item">
+                <span class="label">Fecha de alta:</span>
+                <span class="valor" th:text="${activo.fecha_alta}"></span>
+            </div>
+
+            <div class="detalle-item">
+                <span class="label">Fecha de caducidad:</span>
+                <span class="valor" th:text="${activo.fecha_caducidad}"></span>
+            </div>
+
+            <div class="detalle-item">
+                <span class="label">Estado:</span>
+                <span class="valor" th:text="${activo.estado}"></span>
+            </div>
+
+            <div class="acciones-detalle">
+                <a class="btn-volver" th:href="@{/activos/home}">← Volver</a>
+                <a class="btn-editar" th:href="@{'/activos/editar/' + ${activo.id_activo}}">Editar</a>
+                <a class="btn-eliminar" th:href="@{'/activos/eliminar/' + ${activo.id_activo}}"
+                   onclick="return confirm('¿Seguro que deseas eliminar este activo?');">
+                   Eliminar
+                </a>
+            </div>
+        </div>
+
+    </div>
+
     <th:block th:replace="~{fragments/footer :: footer}"></th:block>
 
 </body>

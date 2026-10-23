@@ -2,7 +2,6 @@ package com.miriammendieta.zeerty_digital_app.service;
 
 import java.util.List;
 import org.springframework.stereotype.Service;
-
 import com.miriammendieta.zeerty_digital_app.model.ActivoDigital;
 import com.miriammendieta.zeerty_digital_app.repository.ActivoDigitalRepository;
 
@@ -11,12 +10,12 @@ public class ActivoDigitalService {
 
     private final ActivoDigitalRepository repo;
 
-    public ActivoDigitalService(ActivoDigitalRepository repo) {
+    ActivoDigitalService(ActivoDigitalRepository repo) {
         this.repo = repo;
     }
 
     public List<ActivoDigital> listar() {
-        return repo.findAll();
+        return repo.findAll(); 
     }
 
     public void guardar(ActivoDigital activo) {
@@ -31,4 +30,3 @@ public class ActivoDigitalService {
         repo.deleteById(id);
     }
 }
-

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.ui.Model;
 
 import com.miriammendieta.zeerty_digital_app.model.Usuario;
+import com.miriammendieta.zeerty_digital_app.service.ActivoDigitalService;
 import com.miriammendieta.zeerty_digital_app.service.UsuarioService;
 
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,9 +16,12 @@ import jakarta.servlet.http.HttpServletResponse;
 public class UsuarioHomeController {
 
     private final UsuarioService usuarioService;
+    private final ActivoDigitalService activoDigitalService;
 
-    public UsuarioHomeController(UsuarioService usuarioService) {
+    public UsuarioHomeController(UsuarioService usuarioService,
+                                 ActivoDigitalService activoDigitalService) {
         this.usuarioService = usuarioService;
+        this.activoDigitalService = activoDigitalService;
     }
 
     @GetMapping("/home")
@@ -27,10 +31,12 @@ public class UsuarioHomeController {
         response.setHeader("Pragma", "no-cache");
         response.setHeader("Expires", "0");
 
-        // carga el usuario logueado
         Usuario usuario = usuarioService.buscarPorEmail(principal.getName());
         model.addAttribute("usuario", usuario);
 
-        return "home"; // templates/home.html
+        // CARGAR LISTA DE ACTIVOS
+        model.addAttribute("listaActivos", activoDigitalService.listar());
+
+        return "activos/home";
     }
 }

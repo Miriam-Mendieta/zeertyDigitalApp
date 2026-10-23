@@ -31,10 +31,14 @@ public class ActivoDigitalController {
 
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
+        if (usuario == null) {
+            return "redirect:/login";
+        }
+
         model.addAttribute("usuario", usuario);
         model.addAttribute("listaActivos", service.listar());
 
-        return "home";
+        return "activos/home";
     }
 
     @GetMapping("/crear")

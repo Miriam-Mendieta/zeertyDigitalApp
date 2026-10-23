@@ -27,7 +27,7 @@ public class InitAdminConfig {
                         "Administrador",
                         "Principal",
                         adminEmail,
-                        passwordEncoder.encode("admin123"), // contraseña cifrada
+                        passwordEncoder.encode("admin123"), 
                         "600000000",
                         Rol.ADMINISTRACION,
                         Estado.ACTIVO

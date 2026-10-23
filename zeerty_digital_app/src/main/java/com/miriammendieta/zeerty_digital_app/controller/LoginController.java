@@ -11,6 +11,8 @@ import com.miriammendieta.zeerty_digital_app.model.Rol;
 import com.miriammendieta.zeerty_digital_app.model.Usuario;
 import com.miriammendieta.zeerty_digital_app.repository.UsuarioRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 /**
  * Controlador encargado de gestionar el formulario de login.
  * se usa inyección por constructor.
@@ -29,27 +31,29 @@ public class LoginController {
     }
 
     @GetMapping("/login")
-public String login(Model model,
-                    @RequestParam(required = false) String inactivo,
-                    @RequestParam(required = false) String error) {
+    public String login(Model model,
+            @RequestParam(required = false) String inactivo,
+            @RequestParam(required = false) String error) {
 
-    if (inactivo != null) {
-        model.addAttribute("mensajeError", "Usuario inactivo. Contacte con el administrador.");
+        if (inactivo != null) {
+            model.addAttribute("mensajeError", "Usuario inactivo. Contacte con el administrador.");
+        }
+
+        if (error != null) {
+            model.addAttribute("mensajeError", "Usuario o contraseña incorrectos.");
+        }
+
+        return "login";
     }
-
-    if (error != null) {
-        model.addAttribute("mensajeError", "Usuario o contraseña incorrectos.");
-    }
-
-    return "login";
-}
-
 
     @PostMapping("/procesar-login")
     public String login(@RequestParam String email,
             @RequestParam String password,
-            Model model) {
+            Model model,
+            HttpSession session) {
+
         Usuario u = usuarioRepository.findByEmail(email).orElse(null);
+
         if (u == null) {
             model.addAttribute("error", "Usuario no encontrado");
             return "login";
@@ -62,6 +66,9 @@ public String login(Model model,
             return "login";
         }
 
+        // GUARDAR USUARIO EN SESIÓN
+        session.setAttribute("usuario", u);
+
         Rol rol = u.getRol();
 
         switch (rol) {
@@ -72,14 +79,11 @@ public String login(Model model,
                 return "redirect:/auditoria/home";
 
             case USUARIO_APP:
-                return "redirect:/home";
-
             case INVITADO:
-                return "redirect:/home";
+                return "redirect:/activos/home";
 
             default:
                 return "redirect:/login";
         }
-
     }
 }

@@ -34,18 +34,16 @@ xmlns:th="http://www.thymeleaf.org"
 
   <!-- CONTENIDO PRINCIPAL -->
   <div class="zd-container">
-    <div th:if="${usuario.rol.name() == 'ADMINISTRACION'}" class="panel-actions">
+    <div th:if="${usuario != null and usuario.rol.name() == 'ADMINISTRACION'}" class="panel-actions">
       <a class="btn-admin" th:href="@{/admin/home}">
         ← Volver a Administración
       </a>
     </div>
 
     <div class="panel-list">
-      <!-- PANEL DE ACTIVOS DIGITALES -->
       <div class="panel-header">
         <h1>Activos Digitales</h1>
 
-        <!-- Botón para crear un nuevo activo -->
         <a class="btn-crear" th:href="@{/activos/crear}">+ Añadir Activo</a>
 
         <table class="tabla-activos">
@@ -64,7 +62,7 @@ xmlns:th="http://www.thymeleaf.org"
             <tr th:each="activo : ${listaActivos}">
               <td th:text="${activo.nombre}"></td>
               <td th:text="${activo.categoria}"></td>
-              <td th:text="${activo.descripcion}"></td> <!-- FALTABA -->
+              <td th:text="${activo.descripcion}"></td>
               <td th:text="${activo.fecha_alta}"></td>
               <td th:text="${activo.fecha_caducidad}"></td>
 
@@ -78,16 +76,19 @@ xmlns:th="http://www.thymeleaf.org"
               </td>
             </tr>
 
-            <tr th:if="${listaActivos == null or #lists.isEmpty(listaActivos)}">
+           <tr th:if="${#lists.isEmpty(listaActivos)}">
               <td colspan="6" class="sin-activos">No tienes activos registrados.</td>
             </tr>
           </tbody>
         </table>
-      </div>
-    </div>
 
-    <!-- FOOTER -->
-    <th:block th:replace="fragments/footer :: footer"></th:block>
+      </div> <!-- panel-header -->
+    </div> <!-- panel-list -->
+  </div> <!-- zd-container -->
+
+
+  <!-- FOOTER -->
+  <th:block th:replace="fragments/footer :: footer"></th:block>
 
 </body>
 

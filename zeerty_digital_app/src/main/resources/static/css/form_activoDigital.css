@@ -44,7 +44,8 @@
 }
 
 /* Botón */
-.btn-crear {
+.btn-crear,
+.btn-actualizar {
     background-color: #4a6cf7;
     color: white;
     padding: 10px 40px;

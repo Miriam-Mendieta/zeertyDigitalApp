@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Activo Digital</title>
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/form_activoDigital.css}">
+</head>
+
+<body>
+
+    <th:block th:replace="~{fragments/header_user :: header_user}"></th:block>
+
+    <div class="zd-container">
+
+        <h1>Editar Activo Digital</h1>
+
+        <form th:action="@{/activos/actualizar}" th:object="${activo}" method="post"class="zd-form">  
+            <input type="hidden" th:field="*{id_activo}">
+
+            <!-- FILA 1: Nombre + Categoría -->
+            <div class="fila-form fila-1">
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input type="text" th:field="*{nombre}" required>
+                </div>
+
+                <div class="campo">
+                    <label>Categoría</label>
+                    <select th:field="*{categoria}">
+                        <option
+                            th:each="cat : ${T(com.miriammendieta.zeerty_digital_app.model.CategoriaActivo).values()}"
+                            th:value="${cat}" th:text="${cat}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- FILA 2: Descripción -->
+            <div class="fila-form fila-2">
+                <div class="campo campo-textarea">
+                    <label>Descripción</label>
+                    <textarea th:field="*{descripcion}" maxlength="250"></textarea>
+                </div>
+            </div>
+
+            <!-- FILA 3: Fechas -->
+            <div class="fila-form fila-3">
+                <div class="campo">
+                    <label>Fecha de alta</label>
+                    <input type="date" th:field="*{fecha_alta}" required>
+                </div>
+
+                <div class="campo">
+                    <label>Fecha de caducidad</label>
+                    <input type="date" th:field="*{fecha_caducidad}">
+                </div>
+            </div>
+
+            <!-- FILA 4: Estado + Guardar -->
+            <div class="fila-form fila-4">
+                <div class="campo">
+                    <label>Estado</label>
+                    <select th:field="*{estado}">
+                        <option value="ACTIVO">Activo</option>
+                        <option value="INACTIVO">Inactivo</option>
+                        <option value="CADUCADO">Caducado</option>
+                        <option value="PROXIMO_A_CADUCAR">Próximo a caducar</option>
+                    </select>
+                </div>
+
+                <div class="campo boton-derecha">
+                    <button type="submit" class="btn-actualizar">Actualizar</button>
+                </div>
+            </div>
+
+        </form>
+
+        <th:block th:replace="~{fragments/footer :: footer}"></th:block>
+
+</body>
+
+</html>
