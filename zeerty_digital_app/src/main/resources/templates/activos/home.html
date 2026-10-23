@@ -29,7 +29,7 @@ xmlns:th="http://www.thymeleaf.org"
 <body>
 
   <!-- HEADER -->
-  <th:block th:replace="fragments/header_user :: header_user"></th:block>
+  <th:block th:replace="~{fragments/header_user :: header_user}"></th:block>
 
 
   <!-- CONTENIDO PRINCIPAL -->
@@ -88,7 +88,7 @@ xmlns:th="http://www.thymeleaf.org"
 
 
   <!-- FOOTER -->
-  <th:block th:replace="fragments/footer :: footer"></th:block>
+  <th:block th:replace="~{fragments/footer :: footer}"></th:block>
 
 </body>
 
