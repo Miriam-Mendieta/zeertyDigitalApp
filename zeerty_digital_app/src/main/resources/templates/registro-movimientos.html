@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="Miriam Mendieta" name="author">
+    <title>ZeertyDigital – Auditoría del Sistema</title>
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" th:href="@{/img/favicon_io/apple-touch-icon.png}">
+    <link rel="icon" type="image/png" sizes="32x32" th:href="@{/img/favicon_io/favicon-32x32.png}">
+    <link rel="icon" type="image/png" sizes="16x16" th:href="@{/img/favicon_io/favicon-16x16.png}">
+    <link rel="manifest" th:href="@{/img/favicon_io/site.webmanifest}">
+
+    <!-- CSS -->
+    <link rel="stylesheet" th:href="@{/css/global.css}">
+    <link rel="stylesheet" th:href="@{/css/auditoria.css}">
+</head>
+
+<body>
+    <!-- HEADER -->
+    <th:block th:replace="~{fragments/header_user :: header_user}"></th:block>
+
+    <div class="zd-container">
+        <div th:if="${usuario != null and usuario.rol.name() == 'ADMINISTRACION'}" class="panel-actions">
+            <a class="btn-admin" th:href="@{/admin/home}">
+                ← Volver a Administración
+            </a>
+        </div>
+
+        <main class="container">
+            <h1>Auditoría del Sistema</h1>
+            <p>Registro de movimientos sobre activos digitales</p>
+            <!-- PANEL DE FILTROS -->
+            <section class="filters">
+                <form th:action="@{/registro-movimientos}" method="get" class="filter-grid">
+
+                    <div>
+                        <label>Usuario</label>
+                        <input type="text" name="usuario" th:value="${param.usuario}">
+                    </div>
+
+                    <div>
+                        <label>Rol</label>
+                        <select name="rol" th:value="${param.rol}">
+                            <option value="">Todos</option>
+                            <option value="ADMIN">Administrador</option>
+                            <option value="AUDITOR">Auditor</option>
+                            <option value="USUARIO_APP">Usuario App</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Acción</label>
+                        <input type="text" name="accion" th:value="${param.accion}">
+                    </div>
+
+                    <div>
+                        <label>Activo</label>
+                        <input type="text" name="activo" th:value="${param.activo}">
+                    </div>
+
+                    <div>
+                        <label>Fecha desde</label>
+                        <input type="date" name="desde" th:value="${param.desde}">
+                    </div>
+
+                    <div>
+                        <label>Fecha hasta</label>
+                        <input type="date" name="hasta" th:value="${param.hasta}">
+                    </div>
+
+                    <div class="filter-button">
+                        <button type="submit" class="btn-primary">Aplicar filtros</button>
+                    </div>
+
+                </form>
+            </section>
+
+            <!-- TABLA DE RESULTADOS -->
+            <section class="table-section">
+                <table class="audit-table">
+                    <thead>
+                        <tr>
+                            <th>Usuario</th>
+                            <th>Rol</th>
+                            <th>Acción</th>
+                            <th>Activo</th>
+                            <th>Fecha / Hora</th>
+                            <th>Detalles</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <!-- Si no hay movimientos -->
+                        <tr th:if="${#lists.isEmpty(movimientos)}">
+                            <td colspan="6" class="empty">No hay movimientos registrados.</td>
+                        </tr>
+
+                        <!-- Iteración de movimientos -->
+                        <tr th:each="log : ${movimientos}">
+                            <td th:text="${log.usuario}"></td>
+                            <td th:text="${log.rolUsuario}"></td>
+                            <td th:text="${log.accion}"></td>
+                            <td th:text="${log.activoNombre}"></td>
+                            <td th:text="${#temporals.format(log.fechaHora, 'dd/MM/yyyy HH:mm')}"></td>
+
+                            <td>
+                                <a th:href="@{'/registro-movimientos/' + ${log.id}}" class="btn-secondary">
+                                    Ver detalles
+                                </a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </section>
+
+        </main>
+
+</body>
+
+</html>
