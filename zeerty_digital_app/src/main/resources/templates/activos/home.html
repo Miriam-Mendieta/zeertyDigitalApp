@@ -28,12 +28,10 @@ xmlns:th="http://www.thymeleaf.org"
 
 <body>
 
-  <!-- HEADER -->
   <th:block th:replace="~{fragments/header_user :: header_user}"></th:block>
 
-
-  <!-- CONTENIDO PRINCIPAL -->
   <div class="zd-container">
+
     <div th:if="${usuario != null and usuario.rol.name() == 'ADMINISTRACION'}" class="panel-actions">
       <a class="btn-admin" th:href="@{/admin/home}">
         ← Volver a Administración
@@ -44,7 +42,12 @@ xmlns:th="http://www.thymeleaf.org"
       <div class="panel-header">
         <h1>Activos Digitales</h1>
 
-        <a class="btn-crear" th:href="@{/activos/crear}">+ Añadir Activo</a>
+        <!-- Botón crear oculto para AUDITORIA -->
+        <a class="btn-crear"
+           th:if="${usuario.rol.name() != 'AUDITORIA'}"
+           th:href="@{/activos/crear}">
+          + Añadir Activo
+        </a>
 
         <table class="tabla-activos">
           <thead>
@@ -67,29 +70,42 @@ xmlns:th="http://www.thymeleaf.org"
               <td th:text="${activo.fecha_caducidad}"></td>
 
               <td class="acciones">
-                <a class="btn-ver" th:href="@{'/activos/ver/' + ${activo.id_activo}}">Ver</a>
-                <a class="btn-editar" th:href="@{'/activos/editar/' + ${activo.id_activo}}">Editar</a>
-                <a class="btn-eliminar" th:href="@{'/activos/eliminar/' + ${activo.id_activo}}"
-                  onclick="return confirm('¿Seguro que deseas eliminar este activo?');">
+
+                <!-- Ver: permitido -->
+                <a class="btn-ver"
+                   th:href="@{'/activos/ver/' + ${activo.id_activo}}">
+                  Ver
+                </a>
+
+                <!-- Editar: oculto para AUDITORIA -->
+                <a class="btn-editar"
+                   th:if="${usuario.rol.name() != 'AUDITORIA'}"
+                   th:href="@{'/activos/editar/' + ${activo.id_activo}}">
+                  Editar
+                </a>
+
+                <!-- Eliminar: oculto para AUDITORIA -->
+                <a class="btn-eliminar"
+                   th:if="${usuario.rol.name() != 'AUDITORIA'}"
+                   th:href="@{'/activos/eliminar/' + ${activo.id_activo}}"
+                   onclick="return confirm('¿Seguro que deseas eliminar este activo?');">
                   Eliminar
                 </a>
+
               </td>
             </tr>
 
-           <tr th:if="${#lists.isEmpty(listaActivos)}">
+            <tr th:if="${#lists.isEmpty(listaActivos)}">
               <td colspan="6" class="sin-activos">No tienes activos registrados.</td>
             </tr>
           </tbody>
         </table>
 
-      </div> <!-- panel-header -->
-    </div> <!-- panel-list -->
-  </div> <!-- zd-container -->
+      </div>
+    </div>
+  </div>
 
-
-  <!-- FOOTER -->
   <th:block th:replace="~{fragments/footer :: footer}"></th:block>
 
 </body>
-
 </html>
