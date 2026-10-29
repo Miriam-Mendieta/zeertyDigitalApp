@@ -31,7 +31,7 @@
 
         <main class="container">
             <h1>Registro de movimientos</h1>
-            <!-- PANEL DE FILTROS -->
+            <!-- Filtros desactivados para MVP
             <section class="filters">
                 <form th:action="@{/registro-movimientos}" method="get" class="filter-grid">
 
@@ -76,6 +76,7 @@
 
                 </form>
             </section>
+            -->
 
             <!-- TABLA DE RESULTADOS -->
             <section class="table-section">
@@ -92,13 +93,10 @@
                     </thead>
 
                     <tbody>
-
-                        <!-- Si no hay movimientos -->
                         <tr th:if="${#lists.isEmpty(movimientos)}">
                             <td colspan="6" class="empty">No hay movimientos registrados.</td>
                         </tr>
 
-                        <!-- Iteración de movimientos -->
                         <tr th:each="log : ${movimientos}">
                             <td th:text="${log.usuario}"></td>
                             <td th:text="${log.rolUsuario}"></td>
@@ -112,11 +110,9 @@
                                 </a>
                             </td>
                         </tr>
-
                     </tbody>
                 </table>
             </section>
-
         </main>
 
 </body>
