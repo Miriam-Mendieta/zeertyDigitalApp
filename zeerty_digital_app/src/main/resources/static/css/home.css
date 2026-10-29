@@ -91,7 +91,8 @@
     opacity: 0.85;
 }
 
-.btn-admin {
+.btn-admin,
+.btn-auditoria {
     text-decoration: none;
     color: #f4f004;
 

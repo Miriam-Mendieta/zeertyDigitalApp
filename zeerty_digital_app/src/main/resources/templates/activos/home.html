@@ -38,7 +38,14 @@ xmlns:th="http://www.thymeleaf.org"
       </a>
     </div>
 
-    <div class="panel-list">
+      <div th:if="${usuario != null and usuario.rol.name() == 'AUDITORIA'}" class="panel-actions">
+      <a class="btn-auditoria" th:href="@{/registro-movimientos}">
+        ← Volver a Auditoria
+      </a>
+    </div>
+
+     <div class="zd-container">
+      <div class="panel-list">
       <div class="panel-header">
         <h1>Activos Digitales</h1>
 

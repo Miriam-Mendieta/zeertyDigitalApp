@@ -38,15 +38,26 @@ public class SecurityConfig {
                                                                 "/css/**", "/js/**", "/img/**")
                                                 .permitAll()
 
-                                                // ADMIN
-                                                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMINISTRACION")
-                                                .requestMatchers("/activos/**").hasAuthority("ROLE_ADMINISTRACION")
+                                                // ADMIN: acceso total
+                                                .requestMatchers("/activos/crear", "/activos/guardar",
+                                                                "/activos/editar/**", "/activos/eliminar/**")
+                                                .hasAuthority("ROLE_ADMINISTRACION")
 
-                                                // AUDITOR + ADMIN
+                                                // USUARIO_APP: puede crear y editar, pero NO eliminar
+                                                .requestMatchers("/activos/crear", "/activos/guardar",
+                                                                "/activos/editar/**")
+                                                .hasAuthority("ROLE_USUARIO_APP")
+
+                                                // AUDITORIA + USUARIO_APP + ADMIN: pueden ver
+                                                .requestMatchers("/activos/ver/**")
+                                                .hasAnyAuthority("ROLE_ADMINISTRACION", "ROLE_AUDITORIA",
+                                                                "ROLE_USUARIO_APP")
+
+                                                // Panel auditoría
                                                 .requestMatchers("/registro-movimientos/**")
                                                 .hasAnyAuthority("ROLE_ADMINISTRACION", "ROLE_AUDITORIA")
 
-                                                // HOME para todos los roles válidos
+                                                // Home accesible para todos los roles válidos
                                                 .requestMatchers("/home")
                                                 .hasAnyAuthority("ROLE_USUARIO_APP", "ROLE_ADMINISTRACION",
                                                                 "ROLE_AUDITORIA", "ROLE_INVITADO")
