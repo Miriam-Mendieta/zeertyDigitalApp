@@ -38,39 +38,39 @@ public class SecurityConfig {
                                 "/css/**", "/js/**", "/img/**")
                         .permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMINISTRACION")
-                        .requestMatchers("/home").hasAnyRole("USUARIO_APP", "ADMINISTRACION", "AUDITORIA", "INVITADO")
-                        .anyRequest().authenticated()
-                    )
 
-                 // Configuración del login
+                        .requestMatchers("/registro-movimientos").hasRole("AUDITORIA")
+                        .requestMatchers("/home").hasAnyRole("USUARIO_APP", "ADMINISTRACION", "AUDITORIA", "INVITADO")
+                        .anyRequest().authenticated())
+
+                // Configuración del login
                 .formLogin(form -> form
                         .loginPage("/login")
                         .loginProcessingUrl("/procesar-login")
                         .successHandler(customSuccessHandler)
                         .failureHandler(new InactivoFailureHandler())
-                        .permitAll()
-                    )
+                        .permitAll())
+                        
                 // Configuración de logout
                 .logout(logout -> logout
                         .logoutUrl("/logout")
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .logoutSuccessUrl("/login"));
-        
-                http.exceptionHandling(ex -> ex
-                    .authenticationEntryPoint((request, response, authException) -> {
-                        
-                         Throwable causa = authException.getCause();
 
-                        if (causa instanceof DisabledException) {
-                            response.sendRedirect("/login?inactivo");
-                            return;
-            }
-            // Usuario o contraseña incorrectos
-            response.sendRedirect("/login?error");
-        })
-    );
-    
+        http.exceptionHandling(ex -> ex
+                .authenticationEntryPoint((request, response, authException) -> {
+
+                    Throwable causa = authException.getCause();
+
+                    if (causa instanceof DisabledException) {
+                        response.sendRedirect("/login?inactivo");
+                        return;
+                    }
+                    // Usuario o contraseña incorrectos
+                    response.sendRedirect("/login?error");
+                }));
+
         return http.build();
     }
 }

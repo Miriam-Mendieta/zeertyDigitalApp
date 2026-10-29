@@ -60,6 +60,10 @@ public class LoginController {
         }
 
         boolean ok = passwordEncoder.matches(password, u.getPasswordHash());
+        if (!passwordEncoder.matches(password, u.getPasswordHash())) {
+    System.out.println(">>> CONTRASEÑA INCORRECTA PARA: " + u.getEmail());
+    return "redirect:/login?error=pass";
+}
 
         if (!ok) {
             model.addAttribute("error", "Contraseña incorrecta");
@@ -70,7 +74,7 @@ public class LoginController {
         session.setAttribute("usuario", u);
 
         Rol rol = u.getRol();
-
+      
         switch (rol) {
             case ADMINISTRACION:
                 return "redirect:/admin/home";

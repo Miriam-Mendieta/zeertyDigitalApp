@@ -39,8 +39,12 @@ public class CustomSuccessHandler implements AuthenticationSuccessHandler {
         // Redirección por rol
         if (usuario.getRol().name().equals("ADMINISTRACION")) {
             response.sendRedirect("/admin/home");
+        } else if(usuario.getRol().name().equals("AUDITORIA")) {
+            response.sendRedirect("/registro-movimientos");
+
         } else {
             response.sendRedirect("/home");
         }
     }
 }
+
