@@ -91,9 +91,9 @@ xmlns:th="http://www.thymeleaf.org"
                   Editar
                 </a>
 
-                <!-- Eliminar: oculto para AUDITORIA -->
+                <!-- Eliminar: oculto para AUDITORIA y USUARIO_APP-->
                 <a class="btn-eliminar"
-                   th:if="${usuario.rol.name() != 'AUDITORIA'}"
+                    th:if="${usuario.rol.name() == 'ADMINISTRACION'}"
                    th:href="@{'/activos/eliminar/' + ${activo.id_activo}}"
                    onclick="return confirm('¿Seguro que deseas eliminar este activo?');">
                   Eliminar
