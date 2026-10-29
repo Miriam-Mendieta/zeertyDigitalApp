@@ -1,0 +1,13 @@
+<th:block th:fragment="header_user">
+    <header class="zd-header">
+        <div class="zd-header-inner">
+                <h1>Panel de Auditoría</h1>
+                <p th:if="${session.usuario != null}" th:text="|Bienvenid@, ${session.usuario.nombre}|"></p>
+            <nav class="zd-nav">
+                <a th:href="@{/home}">Inicio</a>
+                <a th:href="@{/perfil}" class="btn-perfil">Mi Perfil</a>
+                <a th:href="@{/logout}">Cerrar sesión</a>
+            </nav>
+        </div>
+    </header>
+</th:block>
