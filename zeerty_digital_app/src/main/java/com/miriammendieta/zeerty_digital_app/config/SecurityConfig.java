@@ -39,19 +39,19 @@ public class SecurityConfig {
                                                 .permitAll()
 
                                                 // ADMIN: acceso total
-                                                .requestMatchers("/activos/crear", "/activos/guardar",
-                                                                "/activos/editar/**", "/activos/eliminar/**")
+                                                .requestMatchers("/activos/crear-activo", "/activos/guardar",
+                                                                "/activos/editar-activo/**", "/activos/eliminar/**")
                                                 .hasAuthority("ROLE_ADMINISTRACION")
 
-                                                // USUARIO_APP: puede crear y editar, pero NO eliminar
-                                                .requestMatchers("/activos/crear", "/activos/guardar",
-                                                                "/activos/editar/**")
+                                                // USUARIO_APP: crear y editar, pero NO eliminar
+                                                .requestMatchers("/activos/crear-activo",
+                                                                "/activos/editar-activo/**")
                                                 .hasAuthority("ROLE_USUARIO_APP")
 
-                                                // AUDITORIA + USUARIO_APP + ADMIN: pueden ver
-                                                .requestMatchers("/activos/ver/**")
-                                                .hasAnyAuthority("ROLE_ADMINISTRACION", "ROLE_AUDITORIA",
-                                                                "ROLE_USUARIO_APP")
+                                                // VER: todos los roles válidos
+                                                .requestMatchers("/activos/ver-activos/**")
+                                                .hasAnyAuthority("ROLE_ADMINISTRACION", "ROLE_USUARIO_APP",
+                                                                "ROLE_AUDITORIA")
 
                                                 // Panel auditoría
                                                 .requestMatchers("/registro-movimientos/**")

@@ -53,13 +53,9 @@
                 <span class="valor" th:text="${activo.estado}"></span>
             </div>
 
+
             <div class="acciones-detalle">
                 <a class="btn-volver" th:href="@{/activos/home}">← Volver</a>
-                <a class="btn-editar" th:href="@{'/activos/editar/' + ${activo.id_activo}}">Editar</a>
-                <a class="btn-eliminar" th:href="@{'/activos/eliminar/' + ${activo.id_activo}}"
-                   onclick="return confirm('¿Seguro que deseas eliminar este activo?');">
-                   Eliminar
-                </a>
             </div>
         </div>
 
@@ -68,4 +64,5 @@
     <th:block th:replace="~{fragments/footer :: footer}"></th:block>
 
 </body>
+
 </html>
