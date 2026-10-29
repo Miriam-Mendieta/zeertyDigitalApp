@@ -1,30 +1,35 @@
+/* HEADER */
 .header {
-    background: #1f2937;
-    color: #fff;
+    background: #0d1b2a; 
+    color: #e5e7eb;
     padding: 1.5rem 2rem;
 }
 
 .header h1 {
     margin: 0;
     font-size: 1.8rem;
+    color: var(--color-primary); 
 }
 
 .header p {
     margin: 0.3rem 0 0;
-    opacity: 0.8;
+    opacity: 0.75;
 }
 
+/* CONTENEDOR */
 .container {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 1rem;
 }
 
+/* FILTROS */
 .filters {
-    background: #fff;
+    background: rgba(15, 26, 43, 0.7); /* Fondo translúcido oscuro */
     padding: 1rem 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(63, 213, 255, 0.15); /* Acento cyan */
+    box-shadow: 0 2px 6px rgba(63, 213, 255, 0.05);
     margin-bottom: 1.5rem;
 }
 
@@ -36,15 +41,27 @@
 
 .filter-grid label {
     font-size: 0.85rem;
-    color: #374151;
+    color: var(--color-primary); /* Acento cyan */
+    font-weight: 600;
 }
 
+/* INPUTS Y SELECTS */
 .filter-grid input,
 .filter-grid select {
     width: 100%;
     padding: 0.45rem;
-    border: 1px solid #d1d5db;
-    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.45); /* Más oscuro y visible */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: var(--color-text);
+    transition: 0.2s;
+}
+
+.filter-grid input:focus,
+.filter-grid select:focus {
+    border-color: var(--color-primary);
+    background: rgba(0, 0, 0, 0.55);
+    outline: none;
 }
 
 .filter-button {
@@ -52,51 +69,86 @@
     text-align: right;
 }
 
+/* BOTÓN PRINCIPAL */
 .btn-primary {
-    background: #2563eb;
+    background: var(--color-primary);
     color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: 0.55rem 1.1rem;
+    border-radius: 6px;
     border: none;
     cursor: pointer;
+    transition: 0.2s;
 }
 
+.btn-primary:hover {
+    transform: translateY(-2px);
+    opacity: 0.85;
+}
+
+/* BOTÓN SECUNDARIO */
 .btn-secondary {
-    background: #6b7280;
+    background: rgba(255, 255, 255, 0.08); /* Más acorde a tu UI */
     color: #fff;
-    padding: 0.4rem 0.7rem;
-    border-radius: 4px;
+    padding: 0.45rem 0.8rem;
+    border-radius: 6px;
     text-decoration: none;
+    transition: 0.2s;
 }
 
+.btn-secondary:hover {
+    background: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+/* SECCIÓN TABLA */
 .table-section {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.03);
     padding: 1rem 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(63, 213, 255, 0.1);
+    box-shadow: 0 2px 6px rgba(63, 213, 255, 0.05);
 }
 
+/* TABLA */
 .audit-table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.audit-table th,
-.audit-table td {
-    padding: 0.7rem;
-    border-bottom: 1px solid #e5e7eb;
-}
-
+/* CABECERA */
 .audit-table thead {
-    background: #f3f4f6;
+    background: rgba(63, 213, 255, 0.15);
 }
 
+.audit-table th {
+    padding: 0.8rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* FILAS */
+.audit-table td {
+    padding: 0.75rem;
+    color: var(--color-text);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ALTERNANCIA */
+.audit-table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* HOVER */
 .audit-table tbody tr:hover {
-    background: #f9fafb;
+    background: rgba(63, 213, 255, 0.08);
+    transition: 0.2s;
 }
 
+/* MENSAJE VACÍO */
 .empty {
     text-align: center;
-    color: #9ca3af;
+    color: var(--color-text);
+    opacity: 0.6;
     font-style: italic;
 }

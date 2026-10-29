@@ -20,7 +20,7 @@
 
 <body>
     <!-- HEADER -->
-    <th:block th:replace="~{fragments/header_user :: header_user}"></th:block>
+    <th:block th:replace="~{fragments/header_auditoria :: header_auditoria}"></th:block>
 
     <div class="zd-container">
         <div th:if="${usuario != null and usuario.rol.name() == 'ADMINISTRACION'}" class="panel-actions">
@@ -30,8 +30,7 @@
         </div>
 
         <main class="container">
-            
-            <h1>Auditoría: registro de movimientos</h1>
+            <h1>Registro de movimientos</h1>
             <!-- PANEL DE FILTROS -->
             <section class="filters">
                 <form th:action="@{/registro-movimientos}" method="get" class="filter-grid">

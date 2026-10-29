@@ -76,7 +76,7 @@ public class LoginController {
                 return "redirect:/admin/home";
 
             case AUDITORIA:
-                return "redirect:/auditoria/home";
+                return "redirect:/registro-movimientos";
 
             case USUARIO_APP:
             case INVITADO:
