@@ -38,20 +38,30 @@ public class SecurityConfig {
                                                                 "/css/**", "/js/**", "/img/**")
                                                 .permitAll()
 
-                                                // ADMIN: acceso total
-                                                .requestMatchers("/activos/crear-activo", "/activos/guardar",
-                                                                "/activos/editar-activo/**", "/activos/eliminar/**")
-                                                .hasAuthority("ROLE_ADMINISTRACION")
-
-                                                // USUARIO_APP: crear y editar, pero NO eliminar
-                                                .requestMatchers("/activos/crear-activo",
-                                                                "/activos/editar-activo/**")
-                                                .hasAuthority("ROLE_USUARIO_APP")
-
                                                 // VER: todos los roles válidos
-                                                .requestMatchers("/activos/ver-activos/**")
+                                                .requestMatchers("/activos/ver-activo/**")
                                                 .hasAnyAuthority("ROLE_ADMINISTRACION", "ROLE_USUARIO_APP",
                                                                 "ROLE_AUDITORIA")
+
+                                                // CREAR: ADMIN + USUARIO_APP
+                                                .requestMatchers("/activos/crear-activo")
+                                                .hasAnyAuthority("ROLE_ADMINISTRACION", "ROLE_USUARIO_APP")
+
+                                                // GUARDAR: ADMIN + USUARIO_APP
+                                                .requestMatchers("/activos/guardar")
+                                                .hasAnyAuthority("ROLE_ADMINISTRACION", "ROLE_USUARIO_APP")
+
+                                                // EDITAR: ADMIN + USUARIO_APP
+                                                .requestMatchers("/activos/editar-activo/**")
+                                                .hasAnyAuthority("ROLE_ADMINISTRACION", "ROLE_USUARIO_APP")
+
+                                                // ACTUALIZAR: ADMIN + USUARIO_APP
+                                                .requestMatchers("/activos/actualizar")
+                                                .hasAnyAuthority("ROLE_ADMINISTRACION", "ROLE_USUARIO_APP")
+
+                                                // ELIMINAR: SOLO ADMIN
+                                                .requestMatchers("/activos/eliminar/**")
+                                                .hasAuthority("ROLE_ADMINISTRACION")
 
                                                 // Panel auditoría
                                                 .requestMatchers("/registro-movimientos/**")

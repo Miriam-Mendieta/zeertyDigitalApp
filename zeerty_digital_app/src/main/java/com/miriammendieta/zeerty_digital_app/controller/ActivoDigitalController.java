@@ -76,8 +76,21 @@ public class ActivoDigitalController {
     }
 
     @PostMapping("/actualizar")
-    public String actualizar(@ModelAttribute ActivoDigital activo) {
+    public String actualizar(@ModelAttribute ActivoDigital activo, HttpSession session) {
+
+        // Recuperar usuario logueado
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+
+        // Asignar SIEMPRE el usuario al activo
+        activo.setId_usuario(usuario.getIdUsuario());
+
+        // Si no hay fecha de alta, mantener la existente o poner hoy
+        if (activo.getFecha_alta() == null) {
+            activo.setFecha_alta(LocalDate.now());
+        }
+
         service.guardar(activo);
+
         return "redirect:/activos/home";
     }
 
