@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 
 import com.miriammendieta.zeerty_digital_app.model.ActivoDigital;
+import com.miriammendieta.zeerty_digital_app.model.TipoAccion;
 import com.miriammendieta.zeerty_digital_app.model.Usuario;
 import com.miriammendieta.zeerty_digital_app.service.ActivoDigitalService;
+import com.miriammendieta.zeerty_digital_app.service.LogMovimientoService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -49,15 +51,26 @@ public class ActivoDigitalController {
 
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute ActivoDigital activo, HttpSession session) {
-
+        // Recuperar usuario logueado desde la sesión
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
+        // Asignar usuario al activo
         activo.setId_usuario(usuario.getIdUsuario());
 
+        // Fecha de alta por defecto
         if (activo.getFecha_alta() == null) {
             activo.setFecha_alta(LocalDate.now());
         }
+
+        // Guardar activo
         service.guardar(activo);
+
+        // Registrar movimiento en LOG_MOVIMIENTOS
+        LogMovimientoService.registrar(
+                TipoAccion.CREAR,
+                usuario.getIdUsuario(),
+                activo.getId_activo());
+
         return "redirect:/activos/home";
     }
 
