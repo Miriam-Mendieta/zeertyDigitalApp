@@ -22,22 +22,47 @@ public class LogMovimiento {
     @Column(name = "IDUsuario")
     private Integer idUsuario;
 
-    @Column(name = "IDActivo")
+    @Column(name = "IDActivo", nullable = true)
     private Integer idActivo;
 
     // Getters y setters
-    public Integer getIdMovimiento() { return idMovimiento; }
-    public void setIdMovimiento(Integer idMovimiento) { this.idMovimiento = idMovimiento; }
+    public Integer getIdMovimiento() {
+        return idMovimiento;
+    }
 
-    public LocalDateTime getFechaHora() { return fechaHora; }
-    public void setFechaHora(LocalDateTime fechaHora) { this.fechaHora = fechaHora; }
+    public void setIdMovimiento(Integer idMovimiento) {
+        this.idMovimiento = idMovimiento;
+    }
 
-    public TipoAccion getTipoAccion() { return tipoAccion; }
-    public void setTipoAccion(TipoAccion tipoAccion) { this.tipoAccion = tipoAccion; }
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
 
-    public Integer getIdUsuario() { return idUsuario; }
-    public void setIdUsuario(Integer idUsuario) { this.idUsuario = idUsuario; }
+    public void setFechaHora(LocalDateTime fechaHora) {
+        this.fechaHora = fechaHora;
+    }
 
-    public Integer getIdActivo() { return idActivo; }
-    public void setIdActivo(Integer idActivo) { this.idActivo = idActivo; }
+    public TipoAccion getTipoAccion() {
+        return tipoAccion;
+    }
+
+    public void setTipoAccion(TipoAccion tipoAccion) {
+        this.tipoAccion = tipoAccion;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
+    public Integer getIdActivo() {
+        return idActivo;
+    }
+
+    public void setIdActivo(Integer idActivo) {
+        this.idActivo = idActivo;
+    }
 }

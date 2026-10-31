@@ -28,8 +28,8 @@ public class AuditoriaController {
     private final ActivoDigitalService activoService;
 
     public AuditoriaController(LogMovimientoRepository logRepo,
-                               UsuarioService usuarioService,
-                               ActivoDigitalService activoService) {
+            UsuarioService usuarioService,
+            ActivoDigitalService activoService) {
         this.logRepo = logRepo;
         this.usuarioService = usuarioService;
         this.activoService = activoService;
@@ -50,8 +50,6 @@ public class AuditoriaController {
 
         // Cargar logs
         List<LogMovimiento> logs = logRepo.findAll();
-
-        // Convertir logs a DTO con nombres
         List<LogMovimientoDTO> movimientos = new ArrayList<>();
 
         for (LogMovimiento log : logs) {
@@ -67,9 +65,15 @@ public class AuditoriaController {
             dto.setUsuario(u.getNombre() + " " + u.getApellidos());
             dto.setRolUsuario(u.getRol().name());
 
-            // Activo
-            ActivoDigital a = activoService.buscarPorId(log.getIdActivo());
-            dto.setActivoNombre(a.getNombre());
+            // Activo (manejar activos eliminados)
+            Integer idActivo = log.getIdActivo();
+
+            if (idActivo != null) {
+                ActivoDigital a = activoService.buscarPorId(idActivo);
+                dto.setActivoNombre(a.getNombre());
+            } else {
+                dto.setActivoNombre("Activo eliminado");
+            }
 
             movimientos.add(dto);
         }
@@ -78,5 +82,6 @@ public class AuditoriaController {
         model.addAttribute("usuario", usuario);
 
         return "registro-movimientos";
+
     }
 }

@@ -26,7 +26,7 @@ public class ActivoDigitalController {
     private final LogMovimientoService logMovimientoService;
 
     public ActivoDigitalController(ActivoDigitalService service,
-                                   LogMovimientoService logMovimientoService) {
+            LogMovimientoService logMovimientoService) {
         this.service = service;
         this.logMovimientoService = logMovimientoService;
     }
@@ -54,7 +54,7 @@ public class ActivoDigitalController {
 
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute ActivoDigital activo, HttpSession session) {
-        
+
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         // Asignar usuario al activo
@@ -72,8 +72,7 @@ public class ActivoDigitalController {
         logMovimientoService.registrar(
                 TipoAccion.CREAR,
                 usuario.getIdUsuario(),
-                activo.getId_activo()
-        );
+                activo.getId_activo());
 
         return "redirect:/activos/home";
     }
@@ -109,8 +108,7 @@ public class ActivoDigitalController {
         logMovimientoService.registrar(
                 TipoAccion.EDITAR,
                 usuario.getIdUsuario(),
-                activo.getId_activo()
-        );
+                activo.getId_activo());
 
         return "redirect:/activos/home";
     }
@@ -121,15 +119,13 @@ public class ActivoDigitalController {
         Usuario usuario = (Usuario) session.getAttribute("usuario");
         ActivoDigital activo = service.buscarPorId(id);
 
-        service.eliminar(id);
-
         // Registrar movimiento ELIMINAR
         logMovimientoService.registrar(
                 TipoAccion.ELIMINAR,
                 usuario.getIdUsuario(),
-                activo.getId_activo()
-        );
-
+                activo.getId_activo());
+                
+        service.eliminar(id);
         return "redirect:/activos/home";
     }
 }
