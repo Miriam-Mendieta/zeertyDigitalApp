@@ -1,67 +1,82 @@
 package com.miriammendieta.zeerty_digital_app.controller;
 
-import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.miriammendieta.zeerty_digital_app.model.Usuario;
+import com.miriammendieta.zeerty_digital_app.DTO.LogMovimientoDTO;
+import com.miriammendieta.zeerty_digital_app.model.ActivoDigital;
+import com.miriammendieta.zeerty_digital_app.model.LogMovimiento;
 import com.miriammendieta.zeerty_digital_app.model.Rol;
+import com.miriammendieta.zeerty_digital_app.model.Usuario;
+import com.miriammendieta.zeerty_digital_app.repository.LogMovimientoRepository;
+import com.miriammendieta.zeerty_digital_app.service.ActivoDigitalService;
 import com.miriammendieta.zeerty_digital_app.service.UsuarioService;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/registro-movimientos")
 public class AuditoriaController {
 
+    private final LogMovimientoRepository logRepo;
     private final UsuarioService usuarioService;
+    private final ActivoDigitalService activoService;
 
-    public AuditoriaController(UsuarioService usuarioService) {
+    public AuditoriaController(LogMovimientoRepository logRepo,
+                               UsuarioService usuarioService,
+                               ActivoDigitalService activoService) {
+        this.logRepo = logRepo;
         this.usuarioService = usuarioService;
-    }
-
-    @PostConstruct
-    public void init() {
-        System.out.println(">>> AuditoriaController CARGADO");
+        this.activoService = activoService;
     }
 
     @GetMapping("")
-    public String verRegistro(Model model, Principal principal, HttpServletResponse response, HttpSession session) {
+    public String verRegistro(Model model, HttpSession session) {
 
-        // Evitar cache
-        response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-        response.setHeader("Pragma", "no-cache");
-        response.setHeader("Expires", "0");
-
-        // Obtener usuario desde la sesión
         Usuario usuario = (Usuario) session.getAttribute("usuario");
-       
 
-        // Si no está en sesión, obtenerlo por principal
-        if (usuario == null && principal != null) {
-            usuario = usuarioService.buscarPorEmail(principal.getName());
-            session.setAttribute("usuario", usuario);
-        }
-
-        // Si sigue siendo null → expulsar
         if (usuario == null) {
             return "redirect:/login";
         }
 
-        // Mostrar rol real en consola
-        System.out.println(">>> ROL DEL USUARIO REAL: [" + usuario.getRol() + "]");
-
-        // Restricción de acceso
         if (usuario.getRol() != Rol.ADMINISTRACION && usuario.getRol() != Rol.AUDITORIA) {
             return "redirect:/home?error=permiso";
         }
 
+        // Cargar logs
+        List<LogMovimiento> logs = logRepo.findAll();
+
+        // Convertir logs a DTO con nombres
+        List<LogMovimientoDTO> movimientos = new ArrayList<>();
+
+        for (LogMovimiento log : logs) {
+
+            LogMovimientoDTO dto = new LogMovimientoDTO();
+
+            dto.setId(log.getIdMovimiento());
+            dto.setFechaHora(log.getFechaHora());
+            dto.setAccion(log.getTipoAccion().name());
+
+            // Usuario
+            Usuario u = usuarioService.buscarPorId(log.getIdUsuario());
+            dto.setUsuario(u.getNombre() + " " + u.getApellidos());
+            dto.setRolUsuario(u.getRol().name());
+
+            // Activo
+            ActivoDigital a = activoService.buscarPorId(log.getIdActivo());
+            dto.setActivoNombre(a.getNombre());
+
+            movimientos.add(dto);
+        }
+
+        model.addAttribute("movimientos", movimientos);
         model.addAttribute("usuario", usuario);
+
         return "registro-movimientos";
     }
 }

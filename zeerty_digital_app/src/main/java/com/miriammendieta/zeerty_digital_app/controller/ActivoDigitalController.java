@@ -3,12 +3,12 @@ package com.miriammendieta.zeerty_digital_app.controller;
 import java.time.LocalDate;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.ui.Model;
 
 import com.miriammendieta.zeerty_digital_app.model.ActivoDigital;
 import com.miriammendieta.zeerty_digital_app.model.TipoAccion;
@@ -23,9 +23,12 @@ import jakarta.servlet.http.HttpSession;
 public class ActivoDigitalController {
 
     private final ActivoDigitalService service;
+    private final LogMovimientoService logMovimientoService;
 
-    public ActivoDigitalController(ActivoDigitalService service) {
+    public ActivoDigitalController(ActivoDigitalService service,
+                                   LogMovimientoService logMovimientoService) {
         this.service = service;
+        this.logMovimientoService = logMovimientoService;
     }
 
     @GetMapping("/home")
@@ -51,7 +54,7 @@ public class ActivoDigitalController {
 
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute ActivoDigital activo, HttpSession session) {
-        // Recuperar usuario logueado desde la sesión
+        
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
         // Asignar usuario al activo
@@ -66,10 +69,11 @@ public class ActivoDigitalController {
         service.guardar(activo);
 
         // Registrar movimiento en LOG_MOVIMIENTOS
-        LogMovimientoService.registrar(
+        logMovimientoService.registrar(
                 TipoAccion.CREAR,
                 usuario.getIdUsuario(),
-                activo.getId_activo());
+                activo.getId_activo()
+        );
 
         return "redirect:/activos/home";
     }
@@ -91,25 +95,41 @@ public class ActivoDigitalController {
     @PostMapping("/actualizar")
     public String actualizar(@ModelAttribute ActivoDigital activo, HttpSession session) {
 
-        // Recuperar usuario logueado
         Usuario usuario = (Usuario) session.getAttribute("usuario");
 
-        // Asignar SIEMPRE el usuario al activo
         activo.setId_usuario(usuario.getIdUsuario());
 
-        // Si no hay fecha de alta, mantener la existente o poner hoy
         if (activo.getFecha_alta() == null) {
             activo.setFecha_alta(LocalDate.now());
         }
 
         service.guardar(activo);
 
+        // Registrar movimiento EDITAR
+        logMovimientoService.registrar(
+                TipoAccion.EDITAR,
+                usuario.getIdUsuario(),
+                activo.getId_activo()
+        );
+
         return "redirect:/activos/home";
     }
 
     @GetMapping("/eliminar/{id}")
-    public String eliminar(@PathVariable Integer id) {
+    public String eliminar(@PathVariable Integer id, HttpSession session) {
+
+        Usuario usuario = (Usuario) session.getAttribute("usuario");
+        ActivoDigital activo = service.buscarPorId(id);
+
         service.eliminar(id);
+
+        // Registrar movimiento ELIMINAR
+        logMovimientoService.registrar(
+                TipoAccion.ELIMINAR,
+                usuario.getIdUsuario(),
+                activo.getId_activo()
+        );
+
         return "redirect:/activos/home";
     }
 }

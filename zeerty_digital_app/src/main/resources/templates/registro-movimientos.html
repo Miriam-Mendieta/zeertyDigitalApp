@@ -83,32 +83,23 @@
                 <table class="audit-table">
                     <thead>
                         <tr>
-                            <th>Usuario</th>
-                            <th>Rol</th>
-                            <th>Acción</th>
-                            <th>Activo</th>
+                            <th>ID</th>
                             <th>Fecha / Hora</th>
-                            <th>Detalles</th>
+                            <th>Acción</th>
+                            <th>Usuario</th>
+                            <th>Rol Usuario</th>
+                            <th>Activo</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        <tr th:if="${#lists.isEmpty(movimientos)}">
-                            <td colspan="6" class="empty">No hay movimientos registrados.</td>
-                        </tr>
-
-                        <tr th:each="log : ${movimientos}">
-                            <td th:text="${log.usuario}"></td>
-                            <td th:text="${log.rolUsuario}"></td>
-                            <td th:text="${log.accion}"></td>
-                            <td th:text="${log.activoNombre}"></td>
-                            <td th:text="${#temporals.format(log.fechaHora, 'dd/MM/yyyy HH:mm')}"></td>
-
-                            <td>
-                                <a th:href="@{'/registro-movimientos/' + ${log.id}}" class="btn-secondary">
-                                    Ver detalles
-                                </a>
-                            </td>
+                        <tr th:each="mov : ${movimientos}">
+                            <td th:text="${mov.id}"></td>
+                            <td th:text="${mov.fechaHora}"></td>
+                            <td th:text="${mov.accion}"></td>
+                            <td th:text="${mov.usuario}"></td>
+                            <td th:text="${mov.rolUsuario}"></td>
+                            <td th:text="${mov.activoNombre}"></td>
                         </tr>
                     </tbody>
                 </table>
