@@ -59,18 +59,28 @@
 			<optional>true</optional>
 		</dependency>
 
+		<!-- Núcleo principal de pruebas (JUnit 5, Mockito, AssertJ, Spring Test) -->
+    	<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-test</artifactId>
+        	<scope>test</scope>
+    	</dependency>
+
+		<!-- Pruebas específicas para Spring Data LDAP -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-ldap-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+		<!-- Pruebas específicas para Spring Security -->
+    	<dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-starter-security-test</artifactId>
+        	<scope>test</scope>
+    	</dependency>
 
+		<!-- Pruebas específicas para Spring Web MVC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-webmvc-test</artifactId>
