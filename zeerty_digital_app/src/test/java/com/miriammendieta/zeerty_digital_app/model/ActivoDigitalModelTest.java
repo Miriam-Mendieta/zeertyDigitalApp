@@ -28,4 +28,18 @@ public class ActivoDigitalModelTest {
         assertEquals("Producción", activo.getDescripcion(), "La descripción debe coincidir");
         assertEquals(1, activo.getId_usuario(), "El ID del usuario debe coincidir");
     }
+     @Test
+    void testCamposModelo() {
+        ActivoDigital a = new ActivoDigital();
+
+        a.setId_activo(1);
+        a.setNombre("Servidor");
+        a.setDescripcion("Prod");
+        a.setId_usuario(5);
+
+        assertEquals(1, a.getId_activo());
+        assertEquals("Servidor", a.getNombre());
+        assertEquals("Prod", a.getDescripcion());
+        assertEquals(5, a.getId_usuario());
+    }
 }

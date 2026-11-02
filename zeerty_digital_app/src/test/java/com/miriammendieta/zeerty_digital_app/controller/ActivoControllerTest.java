@@ -42,7 +42,7 @@ public class ActivoControllerTest {
     private LogMovimientoService logMovimientoService;
 
     @Test
-    @WithMockUser(username = "admin", roles = { "ADMIN" })
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
     public void testListarActivosView() throws Exception {// Simula un usuario autenticado para pasar la seguridad
 
         // Crear usuario simulado para la sesión (Thymeleaf lo necesita)
@@ -59,6 +59,7 @@ public class ActivoControllerTest {
                 .andExpect(status().isOk()) // El controlador debe devolver 200 OK
                 .andExpect(view().name("activos/home")); // Se debe renderizar la vista Thymeleaf correcta
     }
+
 
     // -------------------------
     // TEST POST /activos/guardar

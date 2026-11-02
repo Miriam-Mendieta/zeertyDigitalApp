@@ -15,11 +15,11 @@ public class ActivoDigitalService {
     }
 
     public List<ActivoDigital> listar() {
-        return repo.findAll(); 
+        return repo.findAll();
     }
 
-    public void guardar(ActivoDigital activo) {
-        repo.save(activo);
+    public ActivoDigital guardar(ActivoDigital activo) {
+        return repo.save(activo);
     }
 
     public ActivoDigital buscarPorId(Integer id) {
