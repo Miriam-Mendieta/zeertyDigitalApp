@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ZeertyDigitalAppApplication<zeerty_digital_app>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.miriammendieta.zeerty_digital_app.ZeertyDigitalAppApplication",
+            "projectName": "zeerty_digital_app",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

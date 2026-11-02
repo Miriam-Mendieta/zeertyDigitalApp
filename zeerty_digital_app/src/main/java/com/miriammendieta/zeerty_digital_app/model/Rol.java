@@ -8,5 +8,7 @@ public enum Rol {
     ADMINISTRACION,
     AUDITORIA,
     USUARIO_APP,
-    INVITADO
-}
+    INVITADO;
+
+    }
+
