@@ -1,25 +1,23 @@
 <p align="center">
   <img width="580" height="350" alt="logo" src="https://github.com/user-attachments/assets/727931ed-895f-43c2-86fb-c8b788f3fa73" />
 </p>
-<h1 align="center">zeertyDigitalApp</h1>
-
-
-**Solución centralizada para el inventario, custodia de credenciales y gestión documental de activos digitales para PYMEs y autónomos.**
+<h1 align="center">zeertyDigitalApp-(MVP Dockerizado) </h1>
 
 ---
 
 ## 📝 Descripción del Proyecto
 
-Aplicación web desarrollada con **Spring Boot** y **Thymeleaf**, orientada a resolver la fragmentación en la gestión de recursos digitales como dominios, certificados SSL, accesos, facturas, licencias y documentación asociada.
+Zeerty Digital App es un **Producto Mínimo Viable (MVP)** desarrollado con **Spring Boot**, orientado a validar la funcionalidad esencial de un sistema de gestión de activos digitales.
 
-El sistema permite:
+Este MVP incluye:
 
-- Organizar activos digitales
-- Gestionar usuarios y roles (RBAC)
-- Controlar caducidades
-- Subir y almacenar documentos
-- Administrar la plataforma desde un panel seguro
-
+- Gestión básica de activos digitales  
+- Registro automático de movimientos  
+- Auditoría simple  
+- Sistema de roles (ADMIN / USER)  
+- Interfaz web con Thymeleaf  
+- Versión dockerizada para despliegue profesional  
+ 
 ---
 
 ## 🛠️ Stack Tecnológico
@@ -51,6 +49,43 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 
 ---
 
+# 🐳 Ejecución con Docker
+
+Este MVP incluye un entorno Docker completo:
+
+- **Contenedor Spring Boot**  
+- **Contenedor MySQL**  
+- **Volumen persistente** para la base de datos  
+
+## 📦 Requisitos
+
+- Docker  
+- Docker Compose  
+
+## 🚀 Levantar la aplicación
+
+```bash
+docker compose up -d
+```
+La aplicación estará disponible en:
+
+👉 http://localhost:8081
+
+🗄️ Persistencia
+Los datos se guardan en el volumen:
+```bash
+mysql_data:/var/lib/mysql
+```
+
+🔐 Credenciales del MVP
+ADMIN 
+Usuario: admin
+Contraseña: admin123
+
+USER
+Usuario: user
+Contraseña: user123
+
 ## 🚀 Cómo ejecutar el proyecto
 
 ### 1. Clonar el repositorio
@@ -59,7 +94,7 @@ Antes de ejecutar el proyecto, asegúrate de tener instalado:
 git clone https://github.com/Miriam-Mendieta/zeertyDigitalApp.git
 cd zeertyDigitalApp
 ```
-### 2. Crear la base de datos en MySQL
+### 2. Crear la base de datos en MySQL (local)
 ```bash
 CREATE DATABASE zeerty_digital_app;
 ```
@@ -78,8 +113,7 @@ spring.jpa.show-sql=true
 ```bash
 mvn spring-boot:run
 ```
-La aplicación estará disponible en:
-    👉 http://localhost:8080
+
 
 ## ✨ Funcionalidades Principales
 - Gestión de usuarios y roles (RBAC)
@@ -102,19 +136,19 @@ La aplicación estará disponible en:
 ```bash
 zeertyDigitalApp/
 ├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/miriammendieta/zeerty_digital_app/
-│   │   │       ├── config/        # Configuración de seguridad y beans
-│   │   │       ├── controller/    # Controladores MVC
-│   │   │       ├── model/         # Entidades JPA
-│   │   │       ├── repository/    # Repositorios Spring Data JPA
-│   │   │       └── service/       # Lógica de negocio
-│   │   └── resources/
-│   │       ├── static/            # CSS, imágenes, favicon
-│   │       ├── templates/         # Vistas Thymeleaf
-│   │       └── application.properties
-└── pom.xml                        # Dependencias y configuración Maven
+│   ├── main/java/com/miriammendieta/zeerty_digital_app/
+│   │       ├── config/        # Seguridad y configuración
+│   │       ├── controller/    # Controladores MVC
+│   │       ├── model/         # Entidades JPA
+│   │       ├── repository/    # Repositorios JPA
+│   │       └── service/       # Lógica de negocio
+│   └── resources/
+│       ├── static/            # CSS, imágenes
+│       ├── templates/         # Vistas Thymeleaf
+│       └── application.properties
+├── Dockerfile
+├── docker-compose.yml
+└── pom.xml
 
 ```
 
@@ -129,8 +163,22 @@ zeertyDigitalApp/
 <img width="600" height="300" alt="panelAdmin" src="https://github.com/user-attachments/assets/f2f3a774-9712-4446-aa17-0c75211ca249" />
 </p>
 
-##  📌 Estado del Proyecto  
-  En desarrollo activo — versión inicial en construcción.
+✨ Funcionalidades del MVP
+- Gestión básica de activos digitales
+
+- Registro automático de movimientos
+
+- Auditoría simple
+
+- Roles ADMIN / USER / auditoria
+
+- Interfaz web con Thymeleaf
+
+- Persistencia MySQL (Docker)
+
+📌 Estado del Proyecto
+🔧 MVP funcional  
+🚧 En desarrollo para futuras versiones (OCR, dominios, certificados, documentos, etc.)
 
 ## 📄 Licencia 
   Este proyecto se distribuye bajo licencia MIT.
