@@ -72,7 +72,7 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		
 		<!-- Pruebas específicas para Spring Data LDAP -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -100,13 +100,7 @@
     		<scope>test</scope>
 		</dependency>
 
-		<dependency>
-    		<groupId>org.springframework.boot</groupId>
-    		<artifactId>spring-boot-test-autoconfigure</artifactId>
-    		<scope>test</scope>
-		</dependency>
-
-
+		
 		<!-- Spring Data JPA (necesario para manejar la BD con Java) -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

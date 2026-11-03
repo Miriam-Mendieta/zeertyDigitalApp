@@ -1,7 +1,7 @@
 package com.miriammendieta.zeerty_digital_app.service;
 
-import com.miriammendieta.zeerty_digital_app.model.TipoAccion;
 import com.miriammendieta.zeerty_digital_app.model.LogMovimiento;
+import com.miriammendieta.zeerty_digital_app.model.TipoAccion;
 import com.miriammendieta.zeerty_digital_app.repository.LogMovimientoRepository;
 
 import org.junit.jupiter.api.Test;
@@ -13,6 +13,7 @@ import static org.mockito.Mockito.*;
 
 /**
  * Pruebas mínimas del servicio de auditoría.
+ * Corrige el error de Mockito: save() NO es void → no se puede usar doNothing().
  */
 public class LogMovimientoServiceTest {
 
