@@ -1,7 +1,12 @@
 <p align="center">
   <img width="580" height="350" alt="logo" src="https://github.com/user-attachments/assets/727931ed-895f-43c2-86fb-c8b788f3fa73" />
 </p>
-<h1 align="center">zeertyDigitalApp-(MVP Dockerizado) </h1>
+<h1 align="center">Zeerty Digital App — MVP</h1>
+
+<p align="center">
+  <strong>Gestión básica de activos digitales, movimientos y auditoría.<br>
+  Versión MVP con ejecución en Docker o en local con MySQL/H2.</strong>
+</p>
 
 ---
 
@@ -16,8 +21,9 @@ Este MVP incluye:
 - Auditoría simple  
 - Sistema de roles (ADMIN / USER)  
 - Interfaz web con Thymeleaf  
-- Versión dockerizada para despliegue profesional  
- 
+- Ejecución profesional mediante Docker (Spring Boot + MySQL + volumen persistente)  
+- Ejecución en local con MySQL o H2 (modo desarrollo)
+
 ---
 
 ## 🛠️ Stack Tecnológico
@@ -62,76 +68,135 @@ Este MVP incluye un entorno Docker completo:
 - Docker  
 - Docker Compose  
 
-## 🚀 Levantar la aplicación
+## 🧱 Arquitectura Docker
 
-```bash
-docker compose up -d
+La aplicación se ejecuta mediante dos contenedores:
+
+### **1. zeerty_app (Spring Boot)**  
+- Puerto expuesto: **8081**  
+- Conecta a MySQL mediante red interna Docker  
+
+### **2. zeerty_mysql (MySQL 8)**  
+- Puerto expuesto: **3306**  
+- Volumen persistente: `mysql_data:/var/lib/mysql`  
+
+## 🗂️ docker-compose.yml
+
+```yaml
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: zeerty_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: zeertydb
+      MYSQL_USER: zeerty
+      MYSQL_PASSWORD: zeerty123
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  app:
+    image: zeerty-app:latest
+    container_name: zeerty_app
+    depends_on:
+      - mysql
+    ports:
+      - "8081:8081"
+    environment:
+      DB_USER: zeerty
+      DB_PASS: zeerty123
+
+volumes:
+  mysql_data:
 ```
-La aplicación estará disponible en:
 
-👉 http://localhost:8081
+## 🚀 Cómo ejecutar con Docker
 
-🗄️ Persistencia
-Los datos se guardan en el volumen:
-```bash
-mysql_data:/var/lib/mysql
-```
+1. Construir la imagen
+   ```bash
+   docker build -t zeerty-app:latest .
+   ```
+2. Levantar los servicios
+    ```bash
+   docker compose up -d
+   ```
+3. Acceder a la aplicación
+     👉 http://localhost:8081
 
-🔐 Credenciales del MVP
-ADMIN 
-Usuario: admin
-Contraseña: admin123
+4. Detener los servicios
+   ```bash
+   docker compose down
+    ```
+   (La base de datos se conserva gracias al volumen persistente.)
+---
+# 🖥️ Ejecución en Local (sin Docker)
 
-USER
-Usuario: user
-Contraseña: user123
+La aplicación puede ejecutarse en local de dos formas: **H2** (más simple) o **MySQL** (modo profesional).
 
-## 🚀 Cómo ejecutar el proyecto
+## 🟩 Opción 1 — Ejecutar con H2 (modo desarrollo)
 
-### 1. Clonar el repositorio
+* ✅ No requiere MySQL
+* ✅ No requiere configuración compleja
+* ✅ Ideal para pruebas rápidas
 
-```bash
-git clone https://github.com/Miriam-Mendieta/zeertyDigitalApp.git
-cd zeertyDigitalApp
-```
-### 2. Crear la base de datos en MySQL (local)
-```bash
-CREATE DATABASE zeerty_digital_app;
-```
-### 3. Configurar credenciales en application.properties
-Ubicación:
-src/main/resources/application.properties
-```bash
-spring.datasource.url=jdbc:mysql://localhost:3306/zeerty_digital_app
-spring.datasource.username=root
-spring.datasource.password=TU_PASSWORD
+### 1. Configurar H2 en `application.properties`
+
+```properties
+spring.datasource.url=jdbc:h2:file:./zeertydb
+spring.datasource.driverClassName=org.h2.Driver
+spring.datasource.username=sa
+spring.datasource.password=
 spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-
+spring.h2.console.enabled=true
 ```
-### 4. Ejecutar la aplicación
+
+### 2. Ejecutar la aplicación
+
 ```bash
 mvn spring-boot:run
 ```
 
+👉 **URL:** http://localhost:8080
 
-## ✨ Funcionalidades Principales
-- Gestión de usuarios y roles (RBAC)
+## 🟦 Opción 2 — Ejecutar con MySQL (modo profesional sin Docker)
 
-- Panel de administración
+### 1. Crear la base de datos
 
-- Gestión de activos digitales (dominios, certificados, accesos…)
+```sql
+CREATE DATABASE zeertydb;
+```
 
-- Control de caducidades
+### 2. Configurar MySQL en `application.properties`
 
-- Subida y almacenamiento de documentos
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/zeertydb
+spring.datasource.username=root
+spring.datasource.password=TU_PASSWORD
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+```
 
-- Validación de formularios
+### 3. Ejecutar la aplicación
 
-- Seguridad con Spring Security
+```bash
+mvn spring-boot:run
+```
 
-- Arquitectura MVC con Thymeleaf
+👉 **URL:** http://localhost:8080
+
+## 🔐 Credenciales del MVP
+
+### **ADMIN**
+* **Usuario:** `admin`
+* **Contraseña:** `admin123`
+
+### **USER**
+* **Usuario:** `user`
+* **Contraseña:** `user123`
 ---
+
 ## 📁 Estructura del Proyecto
 ```bash
 zeertyDigitalApp/
@@ -175,10 +240,64 @@ zeertyDigitalApp/
 - Interfaz web con Thymeleaf
 
 - Persistencia MySQL (Docker)
-
-📌 Estado del Proyecto
+---
+# 📌 Estado del Proyecto
 🔧 MVP funcional  
-🚧 En desarrollo para futuras versiones (OCR, dominios, certificados, documentos, etc.)
+🐳 Dockerizado completamente  
+🗄️ Persistencia MySQL con volumen  
+🧪 Modo local con H2 o MySQL  
+🚧 Próximas mejoras en desarrollo
+
+---
+# 🚀 Roadmap — Evolución del Proyecto (Post-MVP)
+
+---
+
+## 🟩 Fase 1 — Consolidación del MVP *(Corto plazo)*
+
+* [ ] Validaciones avanzadas
+* [ ] Manejo centralizado de errores
+* [ ] Logs estructurados
+* [ ] Auditoría ampliada
+
+---
+
+## 🟦 Fase 2 — Gestión documental avanzada *(Medio plazo)*
+
+* [ ] Subida de documentos reales
+* [ ] Previsualización de archivos
+* [ ] Descarga directa de documentos
+* [ ] Clasificación por categorías
+* [ ] Cifrado de archivos en repososo
+
+---
+
+## 🟨 Fase 3 — Automatización y productividad *(Medio plazo)*
+
+* [ ] OCR para extracción de datos en facturas
+* [ ] Recordatorios y notificaciones automáticas
+* [ ] Panel de métricas y analíticas
+* [ ] Generación e exportación de informes en PDF
+
+---
+
+## 🟪 Fase 4 — Integraciones externas *(Largo plazo)*
+
+* [ ] APIs de verificación de dominios y certificados
+* [ ] Conexión con almacenamiento en nube (Google Drive / OneDrive)
+* [ ] Soporte para almacenamiento de objetos (Amazon S3 / S3-Compatible)
+* [ ] Integración con sistemas ERP / CRM
+
+---
+
+## 🟥 Fase 5 — Versión empresarial *(Largo plazo)*
+
+* [ ] Arquitectura Multi-tenant
+* [ ] Transición a arquitectura de Microservicios
+* [ ] Despliegue y orquestación con Kubernetes
+* [ ] Autenticación avanzada (2FA y OAuth2 / OpenID Connect)
+* [ ] Auditoría completa exportable e inmutable
+
 
 ## 📄 Licencia 
   Este proyecto se distribuye bajo licencia MIT.
