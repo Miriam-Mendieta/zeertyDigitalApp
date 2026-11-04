@@ -113,13 +113,7 @@
 			<artifactId>mysql-connector-j</artifactId>
 		</dependency>
 
-		<!-- Base de datos H2 para versión ejecutable -->
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
+		
 		<!-- Dependencia de Thymeleaf para los archivos HTML -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
